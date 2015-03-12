@@ -2,6 +2,11 @@
 <resources>
 
     <string name="app_name">radiac</string>
-    <string name="hello_world">Hello world!</string>
-
+    <string name="referanse">Referansemåling</string>
+	<string name="othermeasurement">Annen måling</string>
+	<string name="startmeasure">Start måling</string>
+	<string name="LocName">Stedsnavn</string>
+	<string name="AdmName">Kommune</string>
+	<string name="measValue">Doserate</string>
+	<string name="stopmeasure">Stopp måling</string>
 </resources>

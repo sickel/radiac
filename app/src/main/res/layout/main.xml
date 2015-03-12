@@ -1,11 +1,92 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:gravity="center">
+    android:gravity="center"
+	android:orientation="vertical">
+<LinearLayout
+	android:layout_width="match_parent"
+	android:layout_height="0dp"
+	android:layout_weight="1"
+	android:orientation ="horizontal">
+	<Button
+		android:layout_width="0sp"
+		android:layout_weight="1"
+		android:layout_height="wrap_content"
+		android:id="@+id/startMeasure"
+		android:text="@string/startmeasure" />
+  	<Button
+		android:layout_width="0sp"
+		android:layout_weight="1"
+		android:layout_height="wrap_content"
+		android:id="@+id/startMeasure"
+		android:text="@string/stopmeasure" />
+</LinearLayout>
+	<LinearLayout
+		android:layout_width="match_parent"
+		android:layout_height="0dp"
+		android:layout_weight="1"
+		android:orientation ="horizontal">
+		
+<CheckBox
+		android:id="@+id/cbReference" 
+		android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/referanse"
+        android:onClick="onMeastypeClicked"		/>
 
-    <TextView
-        android:text="@string/hello_world"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+		<CheckBox
+			android:id="@+id/cbReference" 
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:text="@string/othermeasurement"
+			android:onClick="onMeastypeClicked"		/>
+		
+	</LinearLayout>
+	
+	<LinearLayout
+		android:layout_width="match_parent"
+		android:layout_height="0dp"
+		android:layout_weight="1"
+		android:orientation ="horizontal">
+	<TextView
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:text="@string/measValue"/>
+	<EditText
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:id="@+id/etMeasValue"/>
+	</LinearLayout>
 
+	<LinearLayout
+		android:layout_width="match_parent"
+		android:layout_height="0dp"
+		android:layout_weight="1"
+		android:orientation ="horizontal">
+		<TextView
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:text="@string/LocName"/>
+		<EditText
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:id="@+id/etLocname"/>
+	</LinearLayout>
+	
+
+	<LinearLayout
+		android:layout_width="match_parent"
+		android:layout_height="0dp"
+		android:layout_weight="1"
+		android:orientation ="horizontal">
+		<TextView
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:text="@string/AdmName"/>
+		<EditText
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:id="@+id/etAdmname"/>
+	</LinearLayout>
+	
 </LinearLayout>
