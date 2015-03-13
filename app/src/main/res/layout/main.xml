@@ -12,13 +12,13 @@
 		android:layout_width="0sp"
 		android:layout_weight="1"
 		android:layout_height="wrap_content"
-		android:id="@+id/startMeasure"
+		android:id="@+id/btStartMeasure"
 		android:text="@string/startmeasure" />
   	<Button
 		android:layout_width="0sp"
 		android:layout_weight="1"
 		android:layout_height="wrap_content"
-		android:id="@+id/startMeasure"
+		android:id="@+id/btStopMeasure"
 		android:text="@string/stopmeasure" />
 </LinearLayout>
 	<LinearLayout
@@ -88,5 +88,137 @@
 			android:layout_height="wrap_content"
 			android:id="@+id/etAdmname"/>
 	</LinearLayout>
-	
+	<LinearLayout
+		android:layout_width="match_parent"
+		android:layout_height="0dp"
+		android:layout_weight="1"
+		android:orientation ="horizontal">
+
+		<CheckBox
+			android:id="@+id/cbReference" 
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:text="@string/rainbefore"
+			android:onClick="onMeastypeClicked"		/>
+
+		<CheckBox
+			android:id="@+id/cbReference" 
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:text="@string/rainduring"
+			android:onClick="onMeastypeClicked"		/>
+
+	</LinearLayout>
+	<LinearLayout
+		android:layout_width="match_parent"
+		android:layout_height="0dp"
+		android:layout_weight="1"
+		android:orientation ="horizontal">
+		<TextView
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:text="@string/snowcover"/>
+		<EditText
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:id="@+id/etSnowcover"/>
+		<TextView
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:text="@string/snowunit"/>
+	</LinearLayout>
+	<LinearLayout
+		android:layout_width="match_parent"
+		android:layout_height="0dp"
+		android:layout_weight="1"
+		android:orientation ="horizontal">
+		<TextView
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:text="@string/comment"/>
+		<EditText
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:id="@+id/etComment"/>
+	</LinearLayout>
+	<View
+		android:layout_width="fill_parent"
+		android:layout_height="2dp"
+		android:background="#c0c0c0"/>
+	<LinearLayout
+		android:layout_width="match_parent"
+		android:layout_height="0dp"
+		android:layout_weight="1"
+		android:orientation ="horizontal">
+		<TextView
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:text="@string/meastime"/>
+		<EditText
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:id="@+id/etTimeFrom"/>
+		<TextView
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:text="-"/>
+		<EditText
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:id="@+id/etTimeTo"/>
+	</LinearLayout>
+	<LinearLayout
+		android:layout_width="match_parent"
+		android:layout_height="0dp"
+		android:layout_weight="1"
+		android:orientation ="horizontal">
+		<TextView
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:text="@string/longitude"/>
+		<EditText
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:id="@+id/etLongitude"/>
+		<TextView
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:text="@string/north"/>
+	</LinearLayout>
+	<LinearLayout
+		android:layout_width="match_parent"
+		android:layout_height="0dp"
+		android:layout_weight="1"
+		android:orientation ="horizontal">
+		<TextView
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:text="@string/latitude"/>
+		<EditText
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:id="@+id/etLatitude"/>
+		<TextView
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:text="@string/east"/>
+	</LinearLayout>
+	<LinearLayout
+		android:layout_width="match_parent"
+		android:layout_height="0dp"
+		android:layout_weight="1"
+		android:orientation ="horizontal">
+		<Button
+			android:layout_width="0sp"
+			android:layout_weight="1"
+			android:layout_height="wrap_content"
+			android:id="@+id/btConfirm"
+			android:text="@string/confirm" />
+		<Button
+			android:layout_width="0sp"
+			android:layout_weight="1"
+			android:layout_height="wrap_content"
+			android:id="@+id/btUndo"
+			android:text="@string/undo" />
+	</LinearLayout>
 </LinearLayout>

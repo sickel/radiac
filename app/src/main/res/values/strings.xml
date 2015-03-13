@@ -9,4 +9,16 @@
 	<string name="AdmName">Kommune</string>
 	<string name="measValue">Doserate</string>
 	<string name="stopmeasure">Stopp måling</string>
+	<string name="confirm">Bekreft</string>
+	<string name="undo">Angre</string>
+	<string name="comment">Kommentar</string>
+	<string name="meastime">Måletid</string>
+	<string name="latitude">Breddegrad</string>
+	<string name="longitude">Lengdegrad</string>
+	<string name="north">N</string>
+	<string name="east">Ø</string>
+	<string name="rainduring">Regn unde måling</string>
+	<string name="rainbefore">Regn rett før måling</string>
+	<string name="snowcover">Snødekke</string>
+	<string name="snowunit">cm</string>
 </resources>
