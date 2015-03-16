@@ -23,7 +23,15 @@ private SimpleDateFormat sdtHhmmss = new SimpleDateFormat("HH:mm:ss");
     }
 	
 	public void onMeastypeClicked(View v){
-		
+		// makes sure max one is checked at any time
+		CheckBox ref = (CheckBox)findViewById(R.id.cbReference);
+		CheckBox clkd=(CheckBox)v;
+		if(clkd.isChecked()){
+			if(ref==clkd){
+				ref=(CheckBox)findViewById(R.id.cbOtherMeasure);
+			}
+			ref.setChecked(false);	
+		}
 	}
 	
 	public void onMeasureStart(View v){
