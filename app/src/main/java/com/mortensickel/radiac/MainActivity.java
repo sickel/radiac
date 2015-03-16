@@ -8,18 +8,30 @@ import android.widget.*;
 import java.util.List;
 import java.util.*;
 import java.text.*;
-
+import android.text.TextWatcher;
+import android.text.Editable;
 public class MainActivity extends Activity 
 {
     @Override
 	
 private Calendar startTime,stopTime;
 private SimpleDateFormat sdtHhmmss = new SimpleDateFormat("HH:mm:ss");	
+	private List<Integer> mandatory =Arrays.asList(R.id.etAdmname,R.id.etLatitude,R.id.etLocname,R.id.etLongitude,R.id.etMeasValue,R.id.etSnowcover,R.id.etTimeFrom,R.id.etTimeTo);
 	
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
+		for(Integer i: mandatory){
+			EditText et=(EditText)findViewById(i);
+			et.addTextChangedListener(new TextWatcher(){
+					public void afterTextChanged(Editable s) {
+						checkFilled();	
+					}
+					public void beforeTextChanged(CharSequence s, int start, int count, int after){}
+					public void onTextChanged(CharSequence s, int start, int before, int count){}
+				}); 
+		}
     }
 	
 	public void onMeastypeClicked(View v){
@@ -35,6 +47,7 @@ private SimpleDateFormat sdtHhmmss = new SimpleDateFormat("HH:mm:ss");
 	}
 	
 	public void onMeasureStart(View v){
+		debug("a");
 		Button bt=(Button)findViewById(R.id.btStartMeasure);
 		bt.setEnabled(false);
 		List<Integer> toEnable=Arrays.asList(R.id.btStopMeasure,R.id.etAdmname,R.id.etComment,R.id.etLocname,R.id.etSnowcover
@@ -68,8 +81,7 @@ private SimpleDateFormat sdtHhmmss = new SimpleDateFormat("HH:mm:ss");
 	
 	
 	
-	public void checkFilled(View v){
-		List<Integer> mandatory=Arrays.asList(R.id.etAdmname,R.id.etLatitude,R.id.etLocname,R.id.etLongitude,R.id.etMeasValue,R.id.etSnowcover,R.id.etTimeFrom,R.id.etTimeTo);
+	public void checkFilled(){
 		Boolean ready=true;
 	//	debug("in");
 		for(Integer i:mandatory){
