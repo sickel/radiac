@@ -262,6 +262,7 @@
 			android:layout_width="0sp"
 			android:layout_weight="1"
 			android:layout_height="wrap_content"
+			android:onClick="confirm"
 			android:id="@+id/btConfirm"
 			android:enabled="false"
 			android:text="@string/confirm" />
@@ -269,6 +270,7 @@
 			android:layout_width="0sp"
 			android:layout_weight="1"
 			android:layout_height="wrap_content"
+			android:onClick="undo"
 			android:enabled="false"
 			android:id="@+id/btUndo"
 			android:text="@string/undo" />

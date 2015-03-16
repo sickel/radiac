@@ -14,10 +14,11 @@ public class MainActivity extends Activity
 {
     @Override
 	
-private Calendar startTime,stopTime;
-private SimpleDateFormat sdtHhmmss = new SimpleDateFormat("HH:mm:ss");	
-	private List<Integer> mandatory =Arrays.asList(R.id.etAdmname,R.id.etLatitude,R.id.etLocname,R.id.etLongitude,R.id.etMeasValue,R.id.etSnowcover,R.id.etTimeFrom,R.id.etTimeTo);
-	
+	private Calendar startTime,stopTime;
+	private SimpleDateFormat sdtHhmmss = new SimpleDateFormat("HH:mm:ss");	
+	private final List<Integer> mandatory =Arrays.asList(R.id.etAdmname,R.id.etLatitude,R.id.etLocname,R.id.etLongitude,R.id.etMeasValue,R.id.etSnowcover,R.id.etTimeFrom,R.id.etTimeTo);
+	private final List<Integer> allItems= Arrays.asList(R.id.etAdmname,R.id.etLatitude,R.id.etLocname,R.id.etLongitude,R.id.etMeasValue,R.id.etSnowcover,R.id.etTimeFrom,R.id.etTimeTo,R.id.etComment,
+	R.id.cbReference,R.id.cbOtherMeasure,R.id.cbRainDuring,R.id.cbRainBefore);
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
@@ -95,4 +96,40 @@ private SimpleDateFormat sdtHhmmss = new SimpleDateFormat("HH:mm:ss");
 		View save=findViewById(R.id.btConfirm);
 		save.setEnabled(ready);
 	}
+	
+	public void confirm(View v){
+		View u =findViewById(R.id.btUndo);
+		if(u.isEnabled()){
+			u.setEnabled(false);
+			for(Integer i:allItems){
+				View vi=findViewById(i);
+				String clss =	vi.getClass().getName();
+			//	debug(clss);
+				if(clss.equals("android.widget.EditText")){
+					EditText et=(EditText)vi;
+					et.setText("");
+				}
+				if(clss.equals("android.widget.CheckBox")){
+					CheckBox cb=(CheckBox)vi;
+					cb.setChecked(false);
+				}
+			}		
+		}else{
+			enableFields(false);
+		}
+	}
+	
+	public void undo(View v){
+		enableFields(true);
+	}	
+		
+	private void enableFields(Boolean ena){	
+		for(Integer i:allItems){
+			View vi=findViewById(i);
+			vi.setEnabled(ena);
+		}
+		View undo = findViewById(R.id.btUndo);
+		undo.setEnabled(!(ena));
+	}
+	
 }
