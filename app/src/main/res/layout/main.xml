@@ -1,9 +1,11 @@
-<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+	android:layout_marginRight="10dp"
+	android:layout_marginLeft="10dp"
     android:gravity="center"
 	android:orientation="vertical">
-<TableRow
+<LinearLayout
 	android:layout_width="match_parent"
 	android:layout_height="0dp"
 	android:layout_weight="1"
@@ -13,15 +15,18 @@
 		android:layout_weight="1"
 		android:layout_height="wrap_content"
 		android:id="@+id/btStartMeasure"
+		android:onClick="onMeasureStart"
 		android:text="@string/startmeasure" />
   	<Button
 		android:layout_width="0sp"
 		android:layout_weight="1"
 		android:layout_height="wrap_content"
 		android:id="@+id/btStopMeasure"
+		android:enabled="false"
+		android:onClick="onMeasureStop"
 		android:text="@string/stopmeasure" />
-</TableRow>
-	<TableRow
+</LinearLayout>
+	<LinearLayout
 		android:layout_width="match_parent"
 		android:layout_height="0dp"
 		android:layout_weight="1"
@@ -32,179 +37,221 @@
 		android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/referanse"
-        android:onClick="onMeastypeClicked"		/>
+	android:enabled="false"
+	android:onClick="onMeastypeClicked"		/>
 
 		<CheckBox
-			android:id="@+id/cbReference" 
+			android:id="@+id/cbOtherMeasure" 
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
 			android:text="@string/othermeasurement"
+			android:enabled="false"
 			android:onClick="onMeastypeClicked"		/>
 		
-	</TableRow>
+	</LinearLayout>
 	
-	<TableRow
+	<LinearLayout
 		android:layout_width="match_parent"
 		android:layout_height="0dp"
 		android:layout_weight="1"
 		android:orientation ="horizontal">
 	<TextView
-		android:layout_width="wrap_content"
+		android:layout_width="0dp"
+		android:layout_weight="3"
+		
 		android:layout_height="wrap_content"
 		android:text="@string/measValue"/>
 	<EditText
-		android:layout_width="wrap_content"
+		android:layout_width="0dp"
+		android:enabled="false"
+		android:onClick="checkFilled"
+		android:layout_weight="5"
 		android:layout_height="wrap_content"
 		android:id="@+id/etMeasValue"/>
-	</TableRow>
+		<TextView
+			android:layout_width="0dp"
+			android:layout_weight="2"
+			android:layout_height="wrap_content"
+			android:text="@string/measunit"/>
+		
+	</LinearLayout>
 
-	<TableRow
+	<LinearLayout
 		android:layout_width="match_parent"
 		android:layout_height="0dp"
 		android:layout_weight="1"
 		android:orientation ="horizontal">
 		<TextView
-			android:layout_width="wrap_content"
+			android:layout_width="0dp"
+			android:layout_weight="3"
 			android:layout_height="wrap_content"
 			android:text="@string/LocName"/>
 		<EditText
-			android:layout_width="wrap_content"
+			android:layout_width="0dp"
+			android:layout_weight="7"
+			android:enabled="false"
 			android:layout_height="wrap_content"
 			android:id="@+id/etLocname"/>
-	</TableRow>
+	</LinearLayout>
 	
 
-	<TableRow
+	<LinearLayout
 		android:layout_width="match_parent"
 		android:layout_height="0dp"
 		android:layout_weight="1"
 		android:orientation ="horizontal">
 		<TextView
-			android:layout_width="wrap_content"
+			android:layout_width="0dp"
+			android:layout_weight="3"
 			android:layout_height="wrap_content"
 			android:text="@string/AdmName"/>
 		<EditText
-			android:layout_width="wrap_content"
+			android:layout_width="0dp"
+			android:layout_weight="7"
 			android:layout_height="wrap_content"
+			android:enabled="false"
 			android:id="@+id/etAdmname"/>
-	</TableRow>
-	<TableRow
+	</LinearLayout>
+	<LinearLayout
 		android:layout_width="match_parent"
 		android:layout_height="0dp"
 		android:layout_weight="1"
 		android:orientation ="horizontal">
 
 		<CheckBox
-			android:id="@+id/cbReference" 
+			android:id="@+id/cbRainBefore" 
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
+			android:enabled="false"
 			android:text="@string/rainbefore"
 			android:onClick="onMeastypeClicked"		/>
 
 		<CheckBox
-			android:id="@+id/cbReference" 
+			android:id="@+id/cbRainDuring" 
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
 			android:text="@string/rainduring"
+			android:enabled="false"
 			android:onClick="onMeastypeClicked"		/>
 
-	</TableRow>
-	<TableRow
+	</LinearLayout>
+	<LinearLayout
 		android:layout_width="match_parent"
 		android:layout_height="0dp"
 		android:layout_weight="1"
 		android:orientation ="horizontal">
 		<TextView
-			android:layout_width="wrap_content"
+			android:layout_width="0dp"
+			android:layout_weight="3"
 			android:layout_height="wrap_content"
 			android:text="@string/snowcover"/>
 		<EditText
-			android:layout_width="wrap_content"
+			android:layout_width="0dp"
+			android:layout_weight="5"
 			android:layout_height="wrap_content"
+			android:enabled="false"
 			android:id="@+id/etSnowcover"/>
 		<TextView
-			android:layout_width="wrap_content"
+			android:layout_width="0dp"
+			android:layout_weight="2"
 			android:layout_height="wrap_content"
 			android:text="@string/snowunit"/>
-	</TableRow>
-	<TableRow
+	</LinearLayout>
+	<LinearLayout
 		android:layout_width="match_parent"
 		android:layout_height="0dp"
 		android:layout_weight="1"
 		android:orientation ="horizontal">
 		<TextView
-			android:layout_width="wrap_content"
+			android:layout_width="0dp"
+			android:layout_weight="3"
 			android:layout_height="wrap_content"
 			android:text="@string/comment"/>
 		<EditText
-			android:layout_width="wrap_content"
+			android:layout_width="0dp"
+			android:layout_weight="7"
+			android:enabled="false"
 			android:layout_height="wrap_content"
 			android:id="@+id/etComment"/>
-	</TableRow>
+	</LinearLayout>
 	
 	<View
 		android:layout_width="fill_parent"
 		android:layout_height="2dp"
 		android:background="#c0c0c0"/>
-	<TableRow
+	<LinearLayout
 		android:layout_width="match_parent"
 		android:layout_height="0dp"
 		android:layout_weight="1"
 		android:orientation ="horizontal">
 		<TextView
-			android:layout_width="wrap_content"
+			android:layout_width="0dp"
+			android:layout_weight="3"
 			android:layout_height="wrap_content"
 			android:text="@string/meastime"/>
 		<EditText
-			android:layout_width="wrap_content"
+			android:layout_width="0dp"
+			android:layout_weight="3"
+			android:enabled="false"
 			android:layout_height="wrap_content"
 			android:id="@+id/etTimeFrom"/>
 		<TextView
-			android:layout_width="wrap_content"
+			android:layout_width="0dp"
+			android:layout_weight="1"
 			android:layout_height="wrap_content"
 			android:text="-"/>
 		<EditText
-			android:layout_width="wrap_content"
+			android:layout_width="0dp"
+			android:layout_weight="3"
+			android:enabled="false"
 			android:layout_height="wrap_content"
 			android:id="@+id/etTimeTo"/>
-	</TableRow>
-	<TableRow
+	</LinearLayout>
+	<LinearLayout
 		android:layout_width="match_parent"
 		android:layout_height="0dp"
 		android:layout_weight="1"
 		android:orientation ="horizontal">
 		<TextView
-			android:layout_width="wrap_content"
+			android:layout_width="0dp"
+			android:layout_weight="3"
 			android:layout_height="wrap_content"
 			android:text="@string/longitude"/>
 		<EditText
-			android:layout_width="wrap_content"
+			android:layout_width="0dp"
+			android:layout_weight="5"
+			android:enabled="false"
 			android:layout_height="wrap_content"
 			android:id="@+id/etLongitude"/>
 		<TextView
-			android:layout_width="wrap_content"
+			android:layout_width="0dp"
+			android:layout_weight="2"
 			android:layout_height="wrap_content"
 			android:text="@string/north"/>
-	</TableRow>
-	<TableRow
+	</LinearLayout>
+	<LinearLayout
 		android:layout_width="match_parent"
 		android:layout_height="0dp"
 		android:layout_weight="1"
 		android:orientation ="horizontal">
 		<TextView
-			android:layout_width="wrap_content"
+			android:layout_width="0dp"
+			android:layout_weight="3"
 			android:layout_height="wrap_content"
 			android:text="@string/latitude"/>
 		<EditText
-			android:layout_width="wrap_content"
+			android:layout_width="0dp"
+			android:layout_weight="5"
+			android:enabled="false"
 			android:layout_height="wrap_content"
 			android:id="@+id/etLatitude"/>
 		<TextView
-			android:layout_width="wrap_content"
+			android:layout_width="0dp"
+			android:layout_weight="2"
 			android:layout_height="wrap_content"
 			android:text="@string/east"/>
-	</TableRow>
-	<TableRow
+	</LinearLayout>
+	<LinearLayout
 		android:layout_width="match_parent"
 		android:layout_height="0dp"
 		android:layout_weight="1"
@@ -214,12 +261,14 @@
 			android:layout_weight="1"
 			android:layout_height="wrap_content"
 			android:id="@+id/btConfirm"
+			android:enabled="false"
 			android:text="@string/confirm" />
 		<Button
 			android:layout_width="0sp"
 			android:layout_weight="1"
 			android:layout_height="wrap_content"
+			android:enabled="false"
 			android:id="@+id/btUndo"
 			android:text="@string/undo" />
-	</TableRow>
-</TableLayout>
+	</LinearLayout>
+</LinearLayout>

@@ -17,8 +17,9 @@
 	<string name="longitude">Lengdegrad</string>
 	<string name="north">N</string>
 	<string name="east">Ø</string>
-	<string name="rainduring">Regn unde måling</string>
+	<string name="rainduring">Regn under måling</string>
 	<string name="rainbefore">Regn rett før måling</string>
 	<string name="snowcover">Snødekke</string>
+	<string name="measunit">uGu/h</string>
 	<string name="snowunit">cm</string>
 </resources>
