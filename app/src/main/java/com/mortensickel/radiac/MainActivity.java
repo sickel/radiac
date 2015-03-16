@@ -11,6 +11,13 @@ import java.text.*;
 import android.text.TextWatcher;
 import android.text.Editable;
 public class MainActivity extends Activity 
+
+// todo timeout
+// todo gps
+// todo save data
+// todo settings
+// todo.reset ui
+
 {
     @Override
 	
@@ -115,12 +122,14 @@ public class MainActivity extends Activity
 				}
 			}		
 		}else{
+			// todo store data
 			enableFields(false);
 		}
 	}
 	
 	public void undo(View v){
 		enableFields(true);
+		// todo send undo
 	}	
 		
 	private void enableFields(Boolean ena){	
