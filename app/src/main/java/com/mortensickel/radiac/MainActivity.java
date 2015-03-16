@@ -20,7 +20,7 @@ public class MainActivity extends Activity
 
 {
     @Override
-	
+	private String uuid;
 	private Calendar startTime,stopTime;
 	private SimpleDateFormat sdtHhmmss = new SimpleDateFormat("HH:mm:ss");	
 	private final List<Integer> mandatory =Arrays.asList(R.id.etAdmname,R.id.etLatitude,R.id.etLocname,R.id.etLongitude,R.id.etMeasValue,R.id.etSnowcover,R.id.etTimeFrom,R.id.etTimeTo);
@@ -30,6 +30,7 @@ public class MainActivity extends Activity
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
+		uuid=Installation.id(getApplicationContext());
 		for(Integer i: mandatory){
 			EditText et=(EditText)findViewById(i);
 			et.addTextChangedListener(new TextWatcher(){
