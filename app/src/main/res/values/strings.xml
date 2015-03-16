@@ -20,6 +20,7 @@
 	<string name="rainduring">Regn under måling</string>
 	<string name="rainbefore">Regn rett før måling</string>
 	<string name="snowcover">Snødekke</string>
-	<string name="measunit">uGu/h</string>
+	<string name="microGyh">uGy/h</string>
+	<string name="milliGyh">mGy/h</string>
 	<string name="snowunit">cm</string>
 </resources>

@@ -16,7 +16,7 @@ public class MainActivity extends Activity
 // todo gps
 // todo save data
 // todo settings
-// todo.reset ui
+// todo reset ui without uploading data
 
 {
     @Override
@@ -81,6 +81,11 @@ public class MainActivity extends Activity
 		stopTime=Calendar.getInstance();
 		EditText st=(EditText)findViewById(R.id.etTimeTo);
 		st.setText(sdtHhmmss.format(stopTime.getTime()));
+		// todo gps
+		EditText crd=(EditText)findViewById(R.id.etLatitude);
+		crd.setText("59.435665");
+		crd=(EditText)findViewById(R.id.etLongitude);
+		crd.setText("15.33243");
 	}
 	
 	private void debug(String t){
@@ -91,7 +96,6 @@ public class MainActivity extends Activity
 	
 	public void checkFilled(){
 		Boolean ready=true;
-	//	debug("in");
 		for(Integer i:mandatory){
 			EditText et=(EditText)findViewById(i);
 			ready=ready && !(et.getText().toString().isEmpty());
@@ -99,7 +103,6 @@ public class MainActivity extends Activity
 		CheckBox ref = (CheckBox)findViewById(R.id.cbReference);
 		CheckBox oth = (CheckBox)findViewById(R.id.cbOtherMeasure);
 		ready=ready && (ref.isChecked() || oth.isChecked());
-//		debug("out");
 		View save=findViewById(R.id.btConfirm);
 		save.setEnabled(ready);
 	}
@@ -111,7 +114,6 @@ public class MainActivity extends Activity
 			for(Integer i:allItems){
 				View vi=findViewById(i);
 				String clss =	vi.getClass().getName();
-			//	debug(clss);
 				if(clss.equals("android.widget.EditText")){
 					EditText et=(EditText)vi;
 					et.setText("");
@@ -120,7 +122,9 @@ public class MainActivity extends Activity
 					CheckBox cb=(CheckBox)vi;
 					cb.setChecked(false);
 				}
-			}		
+			}
+			View start=findViewById(R.id.btStartMeasure);
+			start.setEnabled(true);
 		}else{
 			// todo store data
 			enableFields(false);

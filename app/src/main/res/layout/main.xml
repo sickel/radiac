@@ -71,7 +71,7 @@
 			android:layout_width="0dp"
 			android:layout_weight="2"
 			android:layout_height="wrap_content"
-			android:text="@string/measunit"/>
+			android:text="@string/microGyh"/>
 		
 	</LinearLayout>
 
@@ -150,6 +150,7 @@
 			android:layout_height="wrap_content"
 			android:inputType="numberDecimal"
 			android:enabled="false"
+			android:text="0"
 			android:id="@+id/etSnowcover"/>
 		<TextView
 			android:layout_width="0dp"
