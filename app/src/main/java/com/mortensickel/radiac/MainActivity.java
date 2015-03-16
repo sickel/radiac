@@ -44,10 +44,10 @@ private SimpleDateFormat sdtHhmmss = new SimpleDateFormat("HH:mm:ss");
 			}
 			ref.setChecked(false);	
 		}
+		checkFilled();
 	}
 	
 	public void onMeasureStart(View v){
-		debug("a");
 		Button bt=(Button)findViewById(R.id.btStartMeasure);
 		bt.setEnabled(false);
 		List<Integer> toEnable=Arrays.asList(R.id.btStopMeasure,R.id.etAdmname,R.id.etComment,R.id.etLocname,R.id.etSnowcover
@@ -88,6 +88,9 @@ private SimpleDateFormat sdtHhmmss = new SimpleDateFormat("HH:mm:ss");
 			EditText et=(EditText)findViewById(i);
 			ready=ready && !(et.getText().toString().isEmpty());
 		}
+		CheckBox ref = (CheckBox)findViewById(R.id.cbReference);
+		CheckBox oth = (CheckBox)findViewById(R.id.cbOtherMeasure);
+		ready=ready && (ref.isChecked() || oth.isChecked());
 //		debug("out");
 		View save=findViewById(R.id.btConfirm);
 		save.setEnabled(ready);
