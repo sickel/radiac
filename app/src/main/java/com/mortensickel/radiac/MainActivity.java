@@ -10,6 +10,12 @@ import java.util.*;
 import java.text.*;
 import android.text.TextWatcher;
 import android.text.Editable;
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.content.Intent;
+
 public class MainActivity extends Activity 
 
 // todo timeout
@@ -17,6 +23,8 @@ public class MainActivity extends Activity
 // todo save data
 // todo settings
 // todo reset ui without uploading data
+// todo unlock application
+// todo remote kill
 
 {
     @Override
@@ -26,12 +34,17 @@ public class MainActivity extends Activity
 	private final List<Integer> mandatory =Arrays.asList(R.id.etAdmname,R.id.etLatitude,R.id.etLocname,R.id.etLongitude,R.id.etMeasValue,R.id.etSnowcover,R.id.etTimeFrom,R.id.etTimeTo);
 	private final List<Integer> allItems= Arrays.asList(R.id.etAdmname,R.id.etLatitude,R.id.etLocname,R.id.etLongitude,R.id.etMeasValue,R.id.etSnowcover,R.id.etTimeFrom,R.id.etTimeTo,R.id.etComment,
 	R.id.cbReference,R.id.cbOtherMeasure,R.id.cbRainDuring,R.id.cbRainBefore);
-    protected void onCreate(Bundle savedInstanceState)
+    private final Integer RESULT_SETTINGS=1;
+	
+	
+	
+	protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
 		uuid=Installation.id(getApplicationContext());
 		for(Integer i: mandatory){
+			// checks if registration is finished
 			EditText et=(EditText)findViewById(i);
 			et.addTextChangedListener(new TextWatcher(){
 					public void afterTextChanged(Editable s) {
@@ -42,6 +55,46 @@ public class MainActivity extends Activity
 				}); 
 		}
     }
+	
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(this);
+		}
+	
+	@Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // TODO: Rewrite to use fragments
+        getMenuInflater().inflate(R.menu.settings, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+
+            case R.id.menu_settings:
+                Intent i = new Intent(this, UserSettingsActivity.class);
+                startActivityForResult(i, RESULT_SETTINGS);
+                break;
+			case R.id.menu_upload:
+				saveObs();	
+				break;
+	/*		case R.id.menu_togglegps:
+			    toggleGPS();
+				break;*/
+
+
+        }
+
+        return true;
+    }
+	
+	private void saveObs(){
+		// todo save failed uploads
+	}
+	
 	
 	public void onMeastypeClicked(View v){
 		// makes sure max one is checked at any time
@@ -82,10 +135,10 @@ public class MainActivity extends Activity
 		stopTime=Calendar.getInstance();
 		EditText st=(EditText)findViewById(R.id.etTimeTo);
 		st.setText(sdtHhmmss.format(stopTime.getTime()));
-		// todo gps
-		EditText crd=(EditText)findViewById(R.id.etLatitude);
+		// todo gps -.fake for now...
+		EditText crd=(EditText)findViewById(R.id.etLongitude);
 		crd.setText("59.435665");
-		crd=(EditText)findViewById(R.id.etLongitude);
+		crd=(EditText)findViewById(R.id.etLatitude);
 		crd.setText("15.33243");
 	}
 	
