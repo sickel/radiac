@@ -35,7 +35,7 @@ public class MainActivity extends Activity
 	private final List<Integer> allItems= Arrays.asList(R.id.etAdmname,R.id.etLatitude,R.id.etLocname,R.id.etLongitude,R.id.etMeasValue,R.id.etSnowcover,R.id.etTimeFrom,R.id.etTimeTo,R.id.etComment,
 	R.id.cbReference,R.id.cbOtherMeasure,R.id.cbRainDuring,R.id.cbRainBefore);
     private final Integer RESULT_SETTINGS=1;
-	
+	private String unlockkey="";
 	
 	
 	protected void onCreate(Bundle savedInstanceState)
@@ -56,11 +56,16 @@ public class MainActivity extends Activity
 		}
     }
 	
+	private void checkLock() throws LockedAppException {
+		// Check against some hash of uuid and device unique number
+		if (!unlockkey.equals("123")) throw new LockedAppException(getResources().getString(R.string.lockedAppErr));
+	}
 
     @Override
     public void onResume() {
         super.onResume();
         SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(this);
+		unlockkey=sharedPrefs.getString("pref_unlockkey", "");
 		}
 	
 	@Override
@@ -110,6 +115,12 @@ public class MainActivity extends Activity
 	}
 	
 	public void onMeasureStart(View v){
+		try{
+			checkLock();
+		}catch(LockedAppException e){
+			Toast.makeText(getApplicationContext(),e.getMessage(),Toast.LENGTH_LONG).show();
+			return;
+		}
 		Button bt=(Button)findViewById(R.id.btStartMeasure);
 		bt.setEnabled(false);
 		List<Integer> toEnable=Arrays.asList(R.id.btStopMeasure,R.id.etAdmname,R.id.etComment,R.id.etLocname,R.id.etSnowcover
@@ -197,6 +208,13 @@ public class MainActivity extends Activity
 		}
 		View undo = findViewById(R.id.btUndo);
 		undo.setEnabled(!(ena));
+	}
+	
+	
+	public class LockedAppException extends Exception {
+		public LockedAppException(String msg) {
+			super(msg);
+		}
 	}
 	
 }
