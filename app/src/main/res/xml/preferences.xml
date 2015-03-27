@@ -31,7 +31,7 @@
             android:defaultValue=""
             android:dialogTitle="@string/pref_radiacpatrulje"
             android:key="projectName"
-            android:summary="@string/pref_radiacpatrulje"
+            android:summary="@string/pref_radiacpatrulje_summary"
             android:title="@string/pref_radiacpatrulje" />
 		<EditTextPreference
             android:defaultValue="20"

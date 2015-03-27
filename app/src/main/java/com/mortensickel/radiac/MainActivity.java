@@ -15,15 +15,18 @@ import android.preference.PreferenceManager;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.content.Intent;
-
+import android.app.AlertDialog;
+import android.content.DialogInterface;
+import android.content.*;
 public class MainActivity extends Activity 
 
 // todo timeout
 // todo gps
+// todo upload data
 // todo save data
 // todo settings
-// todo reset ui without uploading data
-// todo unlock application
+// todo reset ui without uploading data - done
+// todo unique unlock code
 // todo remote kill
 
 {
@@ -36,6 +39,11 @@ public class MainActivity extends Activity
 	R.id.cbReference,R.id.cbOtherMeasure,R.id.cbRainDuring,R.id.cbRainBefore);
     private final Integer RESULT_SETTINGS=1;
 	private String unlockkey="";
+	final Context context=this;
+	private Integer timeout=20;
+	private final ShowTimeRunner myTimerThread = new ShowTimeRunner();	
+	
+	
 	
 	
 	protected void onCreate(Bundle savedInstanceState)
@@ -54,6 +62,9 @@ public class MainActivity extends Activity
 					public void onTextChanged(CharSequence s, int start, int before, int count){}
 				}); 
 		}
+		Thread showtimeThread;
+		showtimeThread = new Thread(myTimerThread);
+		showtimeThread.start();
     }
 	
 	private void checkLock() throws LockedAppException {
@@ -86,9 +97,28 @@ public class MainActivity extends Activity
 			case R.id.menu_upload:
 				saveObs();	
 				break;
-	/*		case R.id.menu_togglegps:
-			    toggleGPS();
-				break;*/
+	case R.id.menu_resetui:
+				AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(context);
+				alertDialogBuilder.setTitle("");
+				alertDialogBuilder
+					.setMessage(getResources().getString(R.string.resetmeasure))
+					.setCancelable(false)
+					.setPositiveButton(getResources().getString(R.string.yes),new DialogInterface.OnClickListener() {
+						public void onClick(DialogInterface dialog,int id) {
+							// if this button is clicked, reset logfiles
+							MainActivity.this.enableFields(false);
+							MainActivity.this.resetUi();
+						}
+					})
+					.setNegativeButton(getResources().getString(R.string.no),new DialogInterface.OnClickListener() {
+						public void onClick(DialogInterface dialog,int id) {
+							// do nothing just return
+							dialog.cancel();
+						}
+					});
+				AlertDialog alertDialog = alertDialogBuilder.create();
+				alertDialog.show();
+				break;
 
 
         }
@@ -170,31 +200,46 @@ public class MainActivity extends Activity
 		ready=ready && (ref.isChecked() || oth.isChecked());
 		View save=findViewById(R.id.btConfirm);
 		save.setEnabled(ready);
+		myTimerThread.resetTime();
 	}
 	
 	public void confirm(View v){
 		View u =findViewById(R.id.btUndo);
 		if(u.isEnabled()){
-			u.setEnabled(false);
-			for(Integer i:allItems){
-				View vi=findViewById(i);
-				String clss =	vi.getClass().getName();
-				if(clss.equals("android.widget.EditText")){
-					EditText et=(EditText)vi;
-					et.setText("");
-				}
-				if(clss.equals("android.widget.CheckBox")){
-					CheckBox cb=(CheckBox)vi;
-					cb.setChecked(false);
-				}
-			}
-			View start=findViewById(R.id.btStartMeasure);
-			start.setEnabled(true);
+			resetUi();
 		}else{
 			// todo store data
 			enableFields(false);
 		}
+		myTimerThread.resetTime();
 	}
+	
+	public void resetUi(){
+		View u = findViewById(R.id.btUndo);
+		u.setEnabled(false);
+		for(Integer i:allItems){
+			View vi=findViewById(i);
+			String clss =	vi.getClass().getName();
+			if(clss.equals("android.widget.EditText")){
+				EditText et=(EditText)vi;
+				et.setText("");
+			}
+			if(clss.equals("android.widget.CheckBox")){
+				CheckBox cb=(CheckBox)vi;
+				cb.setChecked(false);
+			}
+		}
+		View bstart=findViewById(R.id.btStartMeasure);
+		bstart.setEnabled(true);
+		List<Integer> buttons =Arrays.asList(R.id.btConfirm,R.id.btUndo,R.id.btStopMeasure);
+		for (Integer i : buttons){
+			View btn=findViewById(i);
+			btn.setEnabled(false);
+		}
+		
+	}
+	
+	
 	
 	public void undo(View v){
 		enableFields(true);
@@ -216,5 +261,53 @@ public class MainActivity extends Activity
 			super(msg);
 		}
 	}
+	
+	
+	
+
+	void doWork(final long startTime){
+		runOnUiThread(new Runnable(){
+				public void run(){
+					try{
+						Date dt= new Date();
+						long sec=dt.getTime();
+						sec=(sec-startTime)/1000;
+
+						if(sec>timeout && timeout > 0){
+							// undo timeout. to be set in settings
+							Button bt=(Button)findViewById(R.id.btUndo);
+							bt.setEnabled(false);
+							bt=(Button)findViewById(R.id.btConfirm);
+							bt.setEnabled(false);
+
+						}
+					}catch(Exception e){}
+				}
+			});
+
+	}
+
+
+	class ShowTimeRunner implements Runnable
+	{
+		private long startTime=new Date().getTime();
+		public void resetTime(){
+			this.startTime=new Date().getTime();
+		}
+
+		@Override
+		public void run()
+		{
+			while(!Thread.currentThread().isInterrupted()){
+				try{
+					doWork(startTime);
+					Thread.sleep(1000);
+				}catch(InterruptedException e){
+					Thread.currentThread().interrupt();
+				}catch(Exception e){}
+			}
+		}
+	}
+	
 	
 }

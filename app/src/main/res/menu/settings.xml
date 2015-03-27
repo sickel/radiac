@@ -7,10 +7,10 @@
     <item
         android:id="@+id/menu_upload"
         android:title="@string/menu_upload" />
-<!--	<item
-		android:id="@+id/menu_key"
-		android:title="@string/menu_unlockkey" />
-    <item
+	<item
+		android:id="@+id/menu_resetui"
+		android:title="@string/menu_resetui" />
+<!--    <item
         android:id="@+id/menu_togglegps"
         android:title="@string/menu_togglegps" />
 	-->

@@ -24,6 +24,8 @@
 	<string name="milliGyh">mGy/h</string>
 	<string name="snowunit">cm</string>
 	<string name="pref_radiacpatrulje">Radiacpatrulje</string>
+	<string name="pref_radiacpatrulje_summary"></string>
+	
 	<string name="pref_user_name">Navn</string>
 	<string name="pref_user_name_summary"></string>
 	<string name="pref_distict">Distrikt</string>
@@ -35,4 +37,8 @@
 	<string name="pref_unlockkey">Nøkkel</string>
 	<string name="pref_unlockkey_summary">Lås opp applikasjon</string>
 	<string name="lockedAppErr">Applikasjonen er låst</string>
+	<string name="menu_resetui">Start ny måling</string>
+	<string name="yes">Ja</string>
+	<string name="no">Nei</string>
+	<string name="resetmeasure">Avslutt måling? Registrerte data blir slettet!</string>
 	</resources>
