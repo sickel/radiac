@@ -18,13 +18,15 @@ import android.content.Intent;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.*;
+import org.json.*;
 public class MainActivity extends Activity 
 
-// todo timeout
+// todo timeout - done
 // todo gps
-// todo upload data
+// todo upload data - done as get
+// todo upload with post
 // todo save data
-// todo settings
+// todo settings 
 // todo reset ui without uploading data - done
 // todo unique unlock code
 // todo remote kill
@@ -39,11 +41,13 @@ public class MainActivity extends Activity
 	R.id.cbReference,R.id.cbOtherMeasure,R.id.cbRainDuring,R.id.cbRainBefore);
     private final Integer RESULT_SETTINGS=1;
 	private String unlockkey="";
-	final Context context=this;
+	private final Context context=this;
 	private Integer timeout=20;
 	private final ShowTimeRunner myTimerThread = new ShowTimeRunner();	
-	
-	
+	private DataUploader uploader;
+	private String uploadUrl="aws.sickel.net/radiac";
+	private String errorfile="errors.log";
+	private String logfile="logfile.log";
 	
 	
 	protected void onCreate(Bundle savedInstanceState)
@@ -65,6 +69,7 @@ public class MainActivity extends Activity
 		Thread showtimeThread;
 		showtimeThread = new Thread(myTimerThread);
 		showtimeThread.start();
+	//	uploader = new DataUploader(uploadUrl,errorfile,context);
     }
 	
 	private void checkLock() throws LockedAppException {
@@ -204,14 +209,45 @@ public class MainActivity extends Activity
 	}
 	
 	public void confirm(View v){
+		myTimerThread.resetTime();
 		View u =findViewById(R.id.btUndo);
 		if(u.isEnabled()){
 			resetUi();
 		}else{
 			// todo store data
 			enableFields(false);
+		
+			HashMap params=new HashMap<String,String>();
+		params.put("uuid",uuid);
+	//	debug("here");
+		// todo time, name, patrulje
+		for(Integer i: allItems){
+			View vi=findViewById(i);
+			String key=getResources().getResourceEntryName(i);
+			String value="";
+			String clss =vi.getClass().getName();
+			if(clss.equals("android.widget.EditText")){
+				EditText et=(EditText)vi;
+				value=et.getText().toString();
+			}
+			if(clss.equals("android.widget.CheckBox")){
+				CheckBox cb=(CheckBox)vi;
+				if(cb.isChecked()){
+					value="True";
+				}else{
+					value="False";
+				}
+			}
+			params.put(key,value);
+	
+			//ongoing
 		}
-		myTimerThread.resetTime();
+		JSONObject json=new JSONObject(params);
+		debug(json.toString());
+		//Toast.makeText(context,json.toString(),Toast.LENGTH_LONG);
+		//json.putAll(params);
+		new DataUploader(uploadUrl,errorfile,context).execute(params);
+		}
 	}
 	
 	public void resetUi(){

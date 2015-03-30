@@ -25,6 +25,16 @@ public class DataUploader extends AsyncTask<HashMap<String,String>, Void,Integer
 	private String errorfile;
 	private Context context;
 	
+	
+	// todo: push this into a create method
+	public DataUploader(String url, String errfile,Context ctx){
+		this.context=ctx;
+		this.errorfile=errfile;
+		this.urlString=url;
+	}
+	
+	
+	
 	protected Integer doInBackground(HashMap<String,String>... paramsets){
 		HashMap<String,String> paramset = new HashMap<String, String>();
 		paramset=paramsets[0];
