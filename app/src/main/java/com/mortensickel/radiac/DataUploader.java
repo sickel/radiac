@@ -2,7 +2,7 @@ package com.mortensickel.radiac;
 import android.os.AsyncTask;
 import java.util.HashMap;
 import java.util.Map;
-
+import android.widget.Toast;
 import android.content.Context;
 import android.content.Context.*;
 
@@ -75,7 +75,8 @@ public class DataUploader extends AsyncTask<HashMap<String,String>, Void,Integer
 			} catch (Exception fe) {
 				fe.printStackTrace();
 			}
-
+		//	Toast.makeText(context," upload error", Toast.LENGTH_SHORT).show();
+			
 			return null;
 		}
 		status=10;
@@ -86,9 +87,11 @@ public class DataUploader extends AsyncTask<HashMap<String,String>, Void,Integer
 
 
 	protected void onPostExecute(Long res){
+
+		Toast.makeText(context,"tried  upload + debug", Toast.LENGTH_SHORT).show();
 		if(status==0){
 			// use catlog
-		//	Toast.makeText(getApplicationContext()," upload error", Toast.LENGTH_SHORT).show();
+			Toast.makeText(context," upload error", Toast.LENGTH_SHORT).show();
 
 		}
 	}

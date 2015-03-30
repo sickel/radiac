@@ -30,6 +30,9 @@ public class MainActivity extends Activity
 // todo reset ui without uploading data - done
 // todo unique unlock code
 // todo remote kill
+// todo activity for sample registration
+// todo select UTM or lat/lon
+// todo select unit
 
 {
     @Override
@@ -45,7 +48,7 @@ public class MainActivity extends Activity
 	private Integer timeout=20;
 	private final ShowTimeRunner myTimerThread = new ShowTimeRunner();	
 	private DataUploader uploader;
-	private String uploadUrl="aws.sickel.net/radiac";
+	private String uploadUrl="http://aws.sickel.net/radiac";
 	private String errorfile="errors.log";
 	private String logfile="logfile.log";
 	
@@ -110,7 +113,7 @@ public class MainActivity extends Activity
 					.setCancelable(false)
 					.setPositiveButton(getResources().getString(R.string.yes),new DialogInterface.OnClickListener() {
 						public void onClick(DialogInterface dialog,int id) {
-							// if this button is clicked, reset logfiles
+							// if this button is clicked, reset user interface to start new measurement
 							MainActivity.this.enableFields(false);
 							MainActivity.this.resetUi();
 						}
