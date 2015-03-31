@@ -40,13 +40,18 @@
             android:key="pref_timeout"
             android:summary="@string/pref_timeout_summary"
             android:title="@string/pref_timeout" />
-		<EditTextPreference
+<!--		<EditTextPreference
             android:defaultValue=""
             android:dialogTitle="@string/pref_unlockkey"
             android:key="pref_unlockkey"
             android:summary="@string/pref_unlockkey_summary"
-            android:title="@string/pref_unlockkey" />
-    </PreferenceCategory>
+            android:title="@string/pref_unlockkey" />-->
+		<ListPreference android:title="Group Choice Test "
+			android:entries="@array/unitItems"
+			android:entryValues="@array/unitItems"
+			android:dialogTitle="Choose an option please">
+		</ListPreference>
+	</PreferenceCategory>
     <!--Any other categories include here
     -->
 </PreferenceScreen>

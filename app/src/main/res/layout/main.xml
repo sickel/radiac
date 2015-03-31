@@ -67,12 +67,20 @@
 		android:inputType="numberDecimal"
 		android:layout_height="wrap_content"
 		android:id="@+id/etMeasValue"/>
-		<TextView
+		<Spinner
+			android:id="@+id/spUnit"
+			android:layout_width="0dp"
+			android:layout_weight="5"
+			android:layout_height="wrap_content"
+			android:entries="@array/unitItems"
+			android:enabled="false"
+			android:prompt="@string/unitPrompt" />
+	<!--	<TextView
 			android:layout_width="0dp"
 			android:layout_weight="2"
 			android:layout_height="wrap_content"
 			android:text="@string/microGyh"/>
-		
+-->		
 	</LinearLayout>
 
 	<LinearLayout

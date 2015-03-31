@@ -41,4 +41,11 @@
 	<string name="yes">Ja</string>
 	<string name="no">Nei</string>
 	<string name="resetmeasure">Avslutt måling? Registrerte data blir slettet!</string>
+	<array name="unitItems">
+		<item></item>
+		<item>nGy/h</item>
+		<item>uGy/h</item>
+		<item>mGy/h</item>
+	</array>
+	<string name="unitPrompt">Måleenhet</string>
 	</resources>

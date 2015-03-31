@@ -19,6 +19,7 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.*;
 import org.json.*;
+import java.io.FileOutputStream;
 public class MainActivity extends Activity 
 
 // todo timeout - done
@@ -47,8 +48,8 @@ public class MainActivity extends Activity
 	private final Context context=this;
 	private Integer timeout=20;
 	private final ShowTimeRunner myTimerThread = new ShowTimeRunner();	
-	private DataUploader uploader;
-	private String uploadUrl="http://aws.sickel.net/radiac";
+	
+private String uploadUrl="http://aws.sickel.net/radiac";
 	private String errorfile="errors.log";
 	private String logfile="logfile.log";
 	
@@ -62,18 +63,17 @@ public class MainActivity extends Activity
 			// checks if registration is finished
 			EditText et=(EditText)findViewById(i);
 			et.addTextChangedListener(new TextWatcher(){
-					public void afterTextChanged(Editable s) {
-						checkFilled();	
-					}
-					public void beforeTextChanged(CharSequence s, int start, int count, int after){}
-					public void onTextChanged(CharSequence s, int start, int before, int count){}
-				}); 
+				public void afterTextChanged(Editable s) {
+					checkFilled();	
+				}
+				public void beforeTextChanged(CharSequence s, int start, int count, int after){}
+				public void onTextChanged(CharSequence s, int start, int before, int count){}
+			}); 
 		}
 		Thread showtimeThread;
 		showtimeThread = new Thread(myTimerThread);
 		showtimeThread.start();
-	//	uploader = new DataUploader(uploadUrl,errorfile,context);
-    }
+	}
 	
 	private void checkLock() throws LockedAppException {
 		// Check against some hash of uuid and device unique number
@@ -105,7 +105,7 @@ public class MainActivity extends Activity
 			case R.id.menu_upload:
 				saveObs();	
 				break;
-	case R.id.menu_resetui:
+			case R.id.menu_resetui:
 				AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(context);
 				alertDialogBuilder.setTitle("");
 				alertDialogBuilder
@@ -275,7 +275,6 @@ public class MainActivity extends Activity
 			View btn=findViewById(i);
 			btn.setEnabled(false);
 		}
-		
 	}
 	
 	
@@ -306,23 +305,21 @@ public class MainActivity extends Activity
 
 	void doWork(final long startTime){
 		runOnUiThread(new Runnable(){
-				public void run(){
-					try{
-						Date dt= new Date();
-						long sec=dt.getTime();
-						sec=(sec-startTime)/1000;
+			public void run(){
+				try{
+					Date dt= new Date();
+					long sec=dt.getTime();
+					sec=(sec-startTime)/1000;
 
-						if(sec>timeout && timeout > 0){
+					if(sec>timeout && timeout > 0){
 							// undo timeout. to be set in settings
-							Button bt=(Button)findViewById(R.id.btUndo);
-							bt.setEnabled(false);
-							bt=(Button)findViewById(R.id.btConfirm);
-							bt.setEnabled(false);
-
-						}
-					}catch(Exception e){}
-				}
-			});
+						Button bt=(Button)findViewById(R.id.btUndo);
+						bt.setEnabled(false);
+						// lock fields - should also be unlockab
+					}
+				}catch(Exception e){}
+			}
+		});
 
 	}
 
