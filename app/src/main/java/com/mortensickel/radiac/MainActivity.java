@@ -33,8 +33,10 @@ public class MainActivity extends Activity
 // todo remote kill
 // todo activity for sample registration
 // todo select UTM or lat/lon
-// todo select unit
-
+// todo project gps to utm
+// todo select unit -done
+// todo check if unit is set
+// todo upload unit
 {
     @Override
 	private String uuid;
@@ -49,7 +51,7 @@ public class MainActivity extends Activity
 	private Integer timeout=20;
 	private final ShowTimeRunner myTimerThread = new ShowTimeRunner();	
 	
-private String uploadUrl="http://aws.sickel.net/radiac";
+	private String uploadUrl="http://aws.sickel.net/radiac";
 	private String errorfile="errors.log";
 	private String logfile="logfile.log";
 	
@@ -195,9 +197,27 @@ private String uploadUrl="http://aws.sickel.net/radiac";
 		Toast.makeText(getApplicationContext(),t,Toast.LENGTH_SHORT).show();
 	}
 	
-	
+	private Float numFromEditText(int id) throws NumberFormatException
+	{
+		EditText et=(EditText)findViewById(id);
+		String txt=et.getText().toString().trim();
+		if (txt.length() == 0){
+			return (float)0;
+		}
+		return Float.parseFloat(txt);
+	}
 	
 	public void checkFilled(){
+		Float north=(float)0;
+		Float east=(float)0;
+		
+		try{
+		 	north=numFromEditText(R.id.etLongitude);
+			
+			east=numFromEditText(R.id.etLongitude);
+		}catch(NumberFormatException e){
+			Toast.makeText(context,"ugyldig tall",Toast.LENGTH_LONG).show();
+		}
 		Boolean ready=true;
 		for(Integer i:mandatory){
 			EditText et=(EditText)findViewById(i);

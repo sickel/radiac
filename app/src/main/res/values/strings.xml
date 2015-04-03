@@ -48,4 +48,5 @@
 		<item>mGy/h</item>
 	</array>
 	<string name="unitPrompt">Måleenhet</string>
+	<string name="utmZone">UTM sone</string>
 	</resources>

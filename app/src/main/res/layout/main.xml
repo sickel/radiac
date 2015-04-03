@@ -224,6 +224,7 @@
 		<TextView
 			android:layout_width="0dp"
 			android:layout_weight="3"
+			android:id="@+id/lontext"
 			android:layout_height="wrap_content"
 			android:text="@string/longitude"/>
 		<EditText
@@ -247,13 +248,14 @@
 		<TextView
 			android:layout_width="0dp"
 			android:layout_weight="3"
+			android:id="@+id/lontext"
 			android:layout_height="wrap_content"
 			android:text="@string/latitude"/>
 		<EditText
 			android:layout_width="0dp"
 			android:layout_weight="5"
-			android:enabled="false"
 			android:inputType="numberDecimal"
+			android:enabled="false"
 			android:layout_height="wrap_content"
 			android:id="@+id/etLatitude"/>
 		<TextView
@@ -261,7 +263,28 @@
 			android:layout_weight="2"
 			android:layout_height="wrap_content"
 			android:text="@string/east"/>
+		
 	</LinearLayout>
+	<LinearLayout
+		android:layout_width="match_parent"
+		android:layout_height="0dp"
+		android:layout_weight="1"
+		android:orientation ="horizontal">
+		<TextView
+			android:layout_width="0dp"
+			android:layout_weight="3"
+			android:id="@+id/lattext"
+			android:layout_height="wrap_content"
+			android:text="@string/utmZone"/>
+		<EditText
+			android:layout_width="0dp"
+			android:layout_weight="5"
+			android:enabled="false"
+			android:inputType="numberDecimal"
+			android:layout_height="wrap_content"
+			android:id="@+id/etUTMZone"/>
+			</LinearLayout>
+
 	<LinearLayout
 		android:layout_width="match_parent"
 		android:layout_height="0dp"
