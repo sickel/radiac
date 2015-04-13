@@ -5,12 +5,12 @@ import android.os.*;
 import android.view.*;
 import android.widget.Button;
 import android.widget.*;
+import android.widget.AdapterView;
 import java.util.List;
 import java.util.*;
 import java.text.*;
 import android.text.TextWatcher;
 import android.text.Editable;
-import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -20,23 +20,25 @@ import android.content.DialogInterface;
 import android.content.*;
 import org.json.*;
 import java.io.FileOutputStream;
-public class MainActivity extends Activity 
-
-// todo timeout - done
+// done timeout 
 // todo gps
-// todo upload data - done as get
+// done upload data - done as get
 // todo upload with post
 // todo save data
-// todo settings 
-// todo reset ui without uploading data - done
+// todo settings - started 
+// todo rewrite settings to use fragments
+// done reset ui without uploading data 
 // todo unique unlock code
 // todo remote kill
 // todo activity for sample registration
 // todo select UTM or lat/lon
 // todo project gps to utm
-// todo select unit -done
-// todo check if unit is set
-// todo upload unit
+// done select unit 
+// done check if unit is set
+// done upload unit
+
+public class MainActivity extends Activity
+
 {
     @Override
 	private String uuid;
@@ -44,8 +46,10 @@ public class MainActivity extends Activity
 	private SimpleDateFormat sdtHhmmss = new SimpleDateFormat("HH:mm:ss");	
 	private final List<Integer> mandatory =Arrays.asList(R.id.etAdmname,R.id.etLatitude,R.id.etLocname,R.id.etLongitude,R.id.etMeasValue,R.id.etSnowcover,R.id.etTimeFrom,R.id.etTimeTo);
 	private final List<Integer> allItems= Arrays.asList(R.id.etAdmname,R.id.etLatitude,R.id.etLocname,R.id.etLongitude,R.id.etMeasValue,R.id.etSnowcover,R.id.etTimeFrom,R.id.etTimeTo,R.id.etComment,
-	R.id.cbReference,R.id.cbOtherMeasure,R.id.cbRainDuring,R.id.cbRainBefore);
+	R.id.cbReference,R.id.cbOtherMeasure,R.id.cbRainDuring,R.id.cbRainBefore,R.id.spUnit);
     private final Integer RESULT_SETTINGS=1;
+	private String user;
+	private String patrol;
 	private String unlockkey="";
 	private final Context context=this;
 	private Integer timeout=20;
@@ -75,6 +79,20 @@ public class MainActivity extends Activity
 		Thread showtimeThread;
 		showtimeThread = new Thread(myTimerThread);
 		showtimeThread.start();
+		Spinner spUnit =(Spinner)findViewById(R.id.spUnit);
+/*		spUnit.setOnItemSelectedListener(new OnItemSelectedListener() {
+				@Override
+				public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
+					// your code here
+				}
+
+				@Override
+				public void onNothingSelected(AdapterView<?> parentView) {
+					// your code here
+				}
+
+			});	*/
+		
 	}
 	
 	private void checkLock() throws LockedAppException {
@@ -87,7 +105,22 @@ public class MainActivity extends Activity
         super.onResume();
         SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(this);
 		unlockkey=sharedPrefs.getString("pref_unlockkey", "");
+		try{
+			checkLock();
+		}catch(LockedAppException e){
+			Toast.makeText(context,R.string.lockedAppErr,Toast.LENGTH_LONG).show();
 		}
+		user=sharedPrefs.getString("pref_user_name","");
+		if (user.length()>0){
+			
+		}
+	}
+	
+	
+
+
+	
+	
 	
 	@Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -209,11 +242,10 @@ public class MainActivity extends Activity
 	
 	public void checkFilled(){
 		Float north=(float)0;
-		Float east=(float)0;
-		
+		Float east=(float)0;		
 		try{
+			// use values of nort and east to check i latlon or utm
 		 	north=numFromEditText(R.id.etLongitude);
-			
 			east=numFromEditText(R.id.etLongitude);
 		}catch(NumberFormatException e){
 			Toast.makeText(context,"ugyldig tall",Toast.LENGTH_LONG).show();
@@ -226,6 +258,8 @@ public class MainActivity extends Activity
 		CheckBox ref = (CheckBox)findViewById(R.id.cbReference);
 		CheckBox oth = (CheckBox)findViewById(R.id.cbOtherMeasure);
 		ready=ready && (ref.isChecked() || oth.isChecked());
+		Spinner spUnit =(Spinner)findViewById(R.id.spUnit);
+		ready=ready && spUnit.getSelectedItemId() > 0;
 		View save=findViewById(R.id.btConfirm);
 		save.setEnabled(ready);
 		myTimerThread.resetTime();
@@ -239,7 +273,6 @@ public class MainActivity extends Activity
 		}else{
 			// todo store data
 			enableFields(false);
-		
 			HashMap params=new HashMap<String,String>();
 		params.put("uuid",uuid);
 	//	debug("here");
@@ -249,17 +282,28 @@ public class MainActivity extends Activity
 			String key=getResources().getResourceEntryName(i);
 			String value="";
 			String clss =vi.getClass().getName();
-			if(clss.equals("android.widget.EditText")){
+			switch(clss){
+			case "android.widget.EditText":
 				EditText et=(EditText)vi;
 				value=et.getText().toString();
-			}
-			if(clss.equals("android.widget.CheckBox")){
+				break;
+			
+			case "android.widget.CheckBox":
 				CheckBox cb=(CheckBox)vi;
 				if(cb.isChecked()){
 					value="True";
 				}else{
 					value="False";
 				}
+				break;
+			
+		    case "android.widget.Spinner":
+				Spinner sp=(Spinner)vi;
+				value=sp.getSelectedItem().toString();
+				break;
+			default:
+				debug(clss);
+				break;
 			}
 			params.put(key,value);
 	
@@ -364,6 +408,6 @@ public class MainActivity extends Activity
 			}
 		}
 	}
-	
-	
+
+		
 }

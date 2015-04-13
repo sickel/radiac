@@ -36,7 +36,7 @@
 	<string name="menu_upload">Last opp</string>
 	<string name="pref_unlockkey">Nøkkel</string>
 	<string name="pref_unlockkey_summary">Lås opp applikasjon</string>
-	<string name="lockedAppErr">Applikasjonen er låst</string>
+	<string name="lockedAppErr">Appen er låst. Kontakt ditt sivilforsvarsdistrikt for å få en opplåsingskode.</string>
 	<string name="menu_resetui">Start ny måling</string>
 	<string name="yes">Ja</string>
 	<string name="no">Nei</string>
@@ -47,6 +47,11 @@
 		<item>uGy/h</item>
 		<item>mGy/h</item>
 	</array>
+	<array name="projections">
+		<item>UTM</item>
+		<item>Geografisk</item>
+	</array>
+	<string  name="projection">Koordinattype</string>
 	<string name="unitPrompt">Måleenhet</string>
 	<string name="utmZone">UTM sone</string>
 	</resources>
