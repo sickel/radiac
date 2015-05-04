@@ -21,7 +21,11 @@ public class LocationService extends Service implements LocationListener {
 	private IBinder lBinder;
     private final IBinder mBinder = new LocalBinder();
 	private static String LOGTAG="Locservice";
-
+	private double lat;
+	private double lon;
+	private int n;
+	
+	
     public class LocalBinder extends Binder {
         LocationService getService(){
             return LocationService.this;
@@ -46,7 +50,9 @@ public class LocationService extends Service implements LocationListener {
                 }
             }
         }
-
+		lat=0;
+		lon=0;
+		n=0;
         return START_STICKY;
 
     }
@@ -70,7 +76,9 @@ public class LocationService extends Service implements LocationListener {
         this.location = location;   
         // TODO this is where you'd do something like context.sendBroadcast()
         Log.i(LOGTAG,location.toString());
-
+		n++;
+		lat=lat+location.getLatitude();
+		lon=lon+location.getLongitude();
     }
 
     public Location getLocation(){

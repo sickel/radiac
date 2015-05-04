@@ -281,17 +281,20 @@ public class MainActivity extends Activity
 		stopTime=Calendar.getInstance();
 		EditText st=(EditText)findViewById(R.id.etTimeTo);
 		st.setText(sdtHhmmss.format(stopTime.getTime()));
-		// todo gps -.fake for now...
+		readgps();
+	}
+		
+public void readgps(){			
 		try{
             if(lServiceBound){
 				Location loc=lService.getLocation();	
 				EditText crd=(EditText)findViewById(R.id.etLongitude);
-				debug(loc.toString());
-	//	crd.setText("59.435665");
+			//	debug(loc.toString());
+			//	crd.setText("59.435665");
 				crd.setText(String.valueOf(loc.getLongitude()));
 				crd=(EditText)findViewById(R.id.etLatitude);
 				crd.setText(String.valueOf(loc.getLatitude()));		
-	//	crd.setText("15.33243");
+			//	crd.setText("15.33243");
 				stopGPS();
 				}
 			else{
