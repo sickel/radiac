@@ -54,4 +54,6 @@
 	<string  name="projection">Koordinattype</string>
 	<string name="unitPrompt">Måleenhet</string>
 	<string name="utmZone">UTM sone</string>
+	<string name="GPSServiceNotAvailable">GPS er ikke tilgjengelig</string>
+	<string name="GPSLocationNotAvailable">Har ikke GPSposisjon</string>
 	</resources>

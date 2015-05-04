@@ -20,6 +20,8 @@ import android.content.DialogInterface;
 import android.content.*;
 import org.json.*;
 import java.io.FileOutputStream;
+import com.mortensickel.radiac.LocationService.LocalBinder;
+import android.location.Location;
 // done timeout 
 // todo gps
 // done upload data - done as get
@@ -54,16 +56,21 @@ public class MainActivity extends Activity
 	private final Context context=this;
 	private Integer timeout=20;
 	private final ShowTimeRunner myTimerThread = new ShowTimeRunner();	
-	
+	protected ServiceConnection lServiceConnection;
+	public boolean lServiceBound=false;
 	private String uploadUrl="http://aws.sickel.net/radiac";
 	private String errorfile="errors.log";
 	private String logfile="logfile.log";
-	
+	private LocationService lService; 
 	
 	protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
+		ActionBar actionBar = getActionBar();
+        assert actionBar != null;
+        actionBar.setCustomView(R.layout.actionbar);
+		actionBar.setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM | ActionBar.DISPLAY_SHOW_HOME);	
 		uuid=Installation.id(getApplicationContext());
 		for(Integer i: mandatory){
 			// checks if registration is finished
@@ -94,11 +101,61 @@ public class MainActivity extends Activity
 			});	*/
 		
 	}
+
+
+	@Override
+	protected void onStop(){
+		if(lServiceBound){		
+			stopGPS();
+		}
+		super.onStop();
+	}
+
+
+	protected void  stopGPS(){
+        // TODO: see if it is possible to turn of GPS immediately
+        unbindService(lServiceConnection);
+		lServiceBound=false;
+	}
+	
+	
+	
 	
 	private void checkLock() throws LockedAppException {
 		// Check against some hash of uuid and device unique number
 		if (!unlockkey.equals("123")) throw new LockedAppException(getResources().getString(R.string.lockedAppErr));
 	}
+	
+	@Override
+	protected void onStart(){
+		super.onStart();
+		startGPS();
+	}
+	
+	
+	private void startGPS(){
+		Intent intent=new Intent(this, LocationService.class);
+		intent.setAction("startListening"   );
+		startService(intent);
+	   	lServiceConnection = new ServiceConnection() {
+            @Override
+            public void onServiceConnected(ComponentName name, IBinder service) {
+                LocalBinder binder = (LocalBinder) service;
+              // todo fix. why doesn't this work?
+				lService = binder.getService();
+                lServiceBound=true;
+            }
+			
+
+            @Override
+            public void onServiceDisconnected(ComponentName name) {
+                lServiceBound = false;
+            }
+        };
+        bindService(intent,lServiceConnection,Context.BIND_AUTO_CREATE);
+	}
+	
+	
 
     @Override
     public void onResume() {
@@ -170,7 +227,7 @@ public class MainActivity extends Activity
     }
 	
 	private void saveObs(){
-		// todo save failed uploads
+		// todo save }failed uploads
 	}
 	
 	
@@ -188,6 +245,7 @@ public class MainActivity extends Activity
 	}
 	
 	public void onMeasureStart(View v){
+		
 		try{
 			checkLock();
 		}catch(LockedAppException e){
@@ -205,7 +263,8 @@ public class MainActivity extends Activity
 		startTime=Calendar.getInstance();
 		EditText st=(EditText)findViewById(R.id.etTimeFrom);
 		st.setText(sdtHhmmss.format(startTime.getTime()));
-	}
+	//	startGPS();
+		}
 	
 	
 	public void onMeasureStop(View v){
@@ -220,10 +279,24 @@ public class MainActivity extends Activity
 		EditText st=(EditText)findViewById(R.id.etTimeTo);
 		st.setText(sdtHhmmss.format(stopTime.getTime()));
 		// todo gps -.fake for now...
-		EditText crd=(EditText)findViewById(R.id.etLongitude);
-		crd.setText("59.435665");
-		crd=(EditText)findViewById(R.id.etLatitude);
-		crd.setText("15.33243");
+		try{
+            if(lServiceBound){
+				Location loc=lService.getLocation();	
+				EditText crd=(EditText)findViewById(R.id.etLongitude);
+				debug(loc.toString());
+	//	crd.setText("59.435665");
+				crd.setText(String.valueOf(loc.getLongitude()));
+				crd=(EditText)findViewById(R.id.etLatitude);
+				crd.setText(String.valueOf(loc.getLatitude()));		
+	//	crd.setText("15.33243");
+				stopGPS();
+				}
+			else{
+                Toast.makeText(getApplicationContext(),getResources().getString(R.string.GPSServiceNotAvailable)+"-if",Toast.LENGTH_SHORT).show();
+            }
+        }catch(Exception e){
+            Toast.makeText(getApplicationContext(),getResources().getString(R.string.GPSLocationNotAvailable),Toast.LENGTH_LONG).show();
+        }
 	}
 	
 	private void debug(String t){
