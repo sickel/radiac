@@ -23,7 +23,9 @@ import java.io.FileOutputStream;
 import com.mortensickel.radiac.LocationService.LocalBinder;
 import android.location.Location;
 // done timeout 
-// todo gps
+// done gps basic lat / lon
+// todo gps average
+// todo gps utm
 // done upload data - done as get
 // todo upload with post
 // todo save data
@@ -42,7 +44,7 @@ import android.location.Location;
 public class MainActivity extends Activity
 
 {
-    @Override
+   
 	private String uuid;
 	private Calendar startTime,stopTime;
 	private SimpleDateFormat sdtHhmmss = new SimpleDateFormat("HH:mm:ss");	
@@ -62,7 +64,8 @@ public class MainActivity extends Activity
 	private String errorfile="errors.log";
 	private String logfile="logfile.log";
 	private LocationService lService; 
-	
+
+	@Override
 	protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
