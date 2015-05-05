@@ -22,10 +22,17 @@ import org.json.*;
 import java.io.FileOutputStream;
 import com.mortensickel.radiac.LocationService.LocalBinder;
 import android.location.Location;
+import java.io.BufferedReader;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.IOException;
+import java.io.File;
+import java.io.FileReader;
 // done timeout 
 // done gps basic lat / lon
 // todo gps average
 // todo gps utm
+// todo fetch location and kommune from server when coordinatea are known
 // done upload data - done as get
 // todo upload with post
 // todo save data
@@ -102,7 +109,10 @@ public class MainActivity extends Activity
 				}
 
 			});	*/
-		
+		TextView ft=(TextView)findViewById(R.id.acbar_freetext);
+		ft.setText("");	
+		ft=(TextView)findViewById(R.id.acbar_status);
+		ft.setText("");
 	}
 
 
@@ -200,6 +210,9 @@ public class MainActivity extends Activity
 			case R.id.menu_upload:
 				saveObs();	
 				break;
+			case R.id.menu_readgps:
+				readgps();
+				break;
 			case R.id.menu_resetui:
 				AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(context);
 				alertDialogBuilder.setTitle("");
@@ -229,9 +242,70 @@ public class MainActivity extends Activity
         return true;
     }
 	
-	private void saveObs(){
-		// todo save }failed uploads
+	public void saveObs(){
+		/* Reading log of observations and reupload those that are not uploaded
+		 */
+		ArrayList<String> linelist = new ArrayList<>();
+		try{
+			InputStream is=openFileInput(errorfile);
+			BufferedReader rdr =new BufferedReader(new InputStreamReader(is));
+			String myLine;
+
+			while ((myLine=rdr.readLine())!=null) 
+				if (!(myLine.substring(0,5).equals("Error")))
+					linelist.add(myLine);	
+			File dir=getFilesDir();
+			File from = new File(dir,errorfile);
+			File to = new File(dir,errorfile+".bak");
+			if(from.exists()) if(!(from.renameTo(to))) debug("Could not rename");
+		}catch(Exception e){
+			Toast.makeText(getApplicationContext(),getResources().getString(R.string.noDataFound),Toast.LENGTH_SHORT).show();
+		}
+		Toast.makeText(getApplicationContext(),linelist.size()+" lines read - uploading",Toast.LENGTH_SHORT).show();
+		for(String line :linelist){
+			try{
+				if (!(line.substring(0,5).equals("Error"))){
+					// URL url = new URL(line);
+                    HashMap<String, String> paramset = new HashMap<String, String>();
+                    paramset.put("parameters",line);
+					new DataUploader(uploadUrl,errorfile,context).execute(paramset);
+					
+                 //   new PostObservation().execute(paramset);
+				}
+			} catch (Exception e) {
+				Toast.makeText(getApplicationContext(),"error "+e,Toast.LENGTH_LONG).show();
+			}
+		}
+        Integer lnum=0;
+        try {
+            lnum=linenumbers(new File(getFilesDir(), errorfile));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        showStatus(lnum.toString());
 	}
+	
+	
+
+    public void showStatus(String status){
+        if (status.equals("0")) status = ""; else
+            status = status + " " + getResources().getString(R.string.setsNotUploaded);
+        TextView tvstatus =(TextView)findViewById(R.id.acbar_status);
+        tvstatus.setText(status);
+    }
+	
+	Integer linenumbers(File file) throws IOException
+    {
+
+
+        BufferedReader br = new BufferedReader(new FileReader(file));
+        String line;
+
+        int lineCount = 0;
+        while ((line = br.readLine()) != null)
+            if (!(line.substring(0, 5).equals("Error"))) lineCount++;
+        return (lineCount);
+    }
 	
 	
 	public void onMeastypeClicked(View v){

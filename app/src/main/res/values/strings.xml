@@ -56,4 +56,8 @@
 	<string name="utmZone">UTM sone</string>
 	<string name="GPSServiceNotAvailable">GPS er ikke tilgjengelig</string>
 	<string name="GPSLocationNotAvailable">Har ikke GPSposisjon</string>
+	<string name="menu_readgps">Hent GPSposisjon</string>
+	<string name="menu_unlock">Lås opp</string>
+	<string name="noDataFound">Ingen data å lese</string>
+	<string name="setsNotUploaded">målinger som ikke er lastet opp</string>
 	</resources>

@@ -10,8 +10,11 @@
 	<item
 		android:id="@+id/menu_resetui"
 		android:title="@string/menu_resetui" />
-<!--    <item
-        android:id="@+id/menu_togglegps"
-        android:title="@string/menu_togglegps" />
-	-->
+   <item
+        android:id="@+id/menu_readgps"
+        android:title="@string/menu_readgps" />
+	<item
+        android:id="@+id/menu_unlock"
+        android:title="@string/menu_unlock" />
+	
 </menu>
