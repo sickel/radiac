@@ -1,52 +1,39 @@
 package com.mortensickel.radiac;
 
 import android.app.*;
-import android.os.*;
-import android.view.*;
-import android.widget.Button;
-import android.widget.*;
-import android.widget.AdapterView;
-import java.util.List;
-import java.util.*;
-import java.text.*;
-import android.text.TextWatcher;
-import android.text.Editable;
-import android.preference.PreferenceManager;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.content.Intent;
-import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.content.*;
+import android.location.*;
+import android.os.*;
+import android.preference.*;
+import android.text.*;
+import android.view.*;
+import android.widget.*;
+import com.mortensickel.radiac.LocationService.*;
+import java.io.*;
+import java.text.*;
+import java.util.*;
 import org.json.*;
-import java.io.FileOutputStream;
-import com.mortensickel.radiac.LocationService.LocalBinder;
-import android.location.Location;
-import java.io.BufferedReader;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.IOException;
-import java.io.File;
-import java.io.FileReader;
+// import com.jhlabs.*;
+
 // done timeout 
 // done gps basic lat / lon
 // todo gps average
-// todo gps utm
+// todo select UTM or lat/lon
+// todo project gps to utm
 // todo fetch location and kommune from server when coordinatea are known
 // done upload data - done as get
 // todo upload with post
-// todo save data
+// done save data
 // todo settings - started 
 // todo rewrite settings to use fragments
 // done reset ui without uploading data 
 // todo unique unlock code
 // todo remote kill
 // todo activity for sample registration
-// todo select UTM or lat/lon
-// todo project gps to utm
 // done select unit 
 // done check if unit is set
 // done upload unit
+// todo bigrapportaktivotet
 
 public class MainActivity extends Activity
 
@@ -136,7 +123,7 @@ public class MainActivity extends Activity
 	
 	private void checkLock() throws LockedAppException {
 		// Check against some hash of uuid and device unique number
-		if (!unlockkey.equals("123")) throw new LockedAppException(getResources().getString(R.string.lockedAppErr));
+		if (!unlockkey.equals("123Radiac")) throw new LockedAppException(getResources().getString(R.string.lockedAppErr));
 	}
 	
 	@Override
@@ -213,6 +200,9 @@ public class MainActivity extends Activity
 			case R.id.menu_readgps:
 				readgps();
 				break;
+			case R.id.menu_unlock:
+			
+				break;
 			case R.id.menu_resetui:
 				AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(context);
 				alertDialogBuilder.setTitle("");
@@ -252,7 +242,8 @@ public class MainActivity extends Activity
 			String myLine;
 
 			while ((myLine=rdr.readLine())!=null) 
-				if (!(myLine.substring(0,5).equals("Error")))
+				if(myLine.length()>4)
+					if (!(myLine.substring(0,5).equals("Error")))
 					linelist.add(myLine);	
 			File dir=getFilesDir();
 			File from = new File(dir,errorfile);
@@ -329,20 +320,25 @@ public class MainActivity extends Activity
 			Toast.makeText(getApplicationContext(),e.getMessage(),Toast.LENGTH_LONG).show();
 			return;
 		}
-		Button bt=(Button)findViewById(R.id.btStartMeasure);
-		bt.setEnabled(false);
-		List<Integer> toEnable=Arrays.asList(R.id.btStopMeasure,R.id.etAdmname,R.id.etComment,R.id.etLocname,R.id.etSnowcover
-		,R.id.cbReference,R.id.cbOtherMeasure,R.id.cbRainBefore,R.id.cbRainDuring);
-		for (Integer i : toEnable){
-			View et=findViewById(i);
-			et.setEnabled(true);
-		}
+		findViewById(R.id.btStartMeasure).setEnabled(false);
+		enableFields(true);
+		findViewById(R.id.btStopMeasure).setEnabled(true);
+		findViewById(R.id.etMeasValue).setEnabled(false);
 		startTime=Calendar.getInstance();
 		EditText st=(EditText)findViewById(R.id.etTimeFrom);
 		st.setText(sdtHhmmss.format(startTime.getTime()));
 	//	startGPS();
 		}
 	
+		
+/*	public void enablefields(boolean enable_all){
+		List<Integer> toEnable=Arrays.asList(R.id.btStopMeasure,R.id.etAdmname,R.id.etComment,R.id.etLocname,R.id.etSnowcover
+											 ,R.id.cbReference,R.id.cbOtherMeasure,R.id.cbRainBefore,R.id.cbRainDuring);
+		for (Integer i : toEnable){
+			View et=findViewById(i);
+			et.setEnabled(true);
+		}
+	}*/
 	
 	public void onMeasureStop(View v){
 		Button bt=(Button)findViewById(R.id.btStopMeasure);
@@ -416,6 +412,13 @@ public void readgps(){
 		View save=findViewById(R.id.btConfirm);
 		save.setEnabled(ready);
 		myTimerThread.resetTime();
+		Integer lnum=0;
+        try {
+            lnum=linenumbers(new File(getFilesDir(), errorfile));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        showStatus(lnum.toString());
 	}
 	
 	public void confirm(View v){
@@ -463,7 +466,7 @@ public void readgps(){
 			//ongoing
 		}
 		JSONObject json=new JSONObject(params);
-		debug(json.toString());
+		//	debug(json.toString());
 		//Toast.makeText(context,json.toString(),Toast.LENGTH_LONG);
 		//json.putAll(params);
 		new DataUploader(uploadUrl,errorfile,context).execute(params);
