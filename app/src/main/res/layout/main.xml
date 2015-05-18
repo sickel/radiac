@@ -248,7 +248,7 @@
 		<TextView
 			android:layout_width="0dp"
 			android:layout_weight="3"
-			android:id="@+id/lontext"
+			android:id="@+id/lattext"
 			android:layout_height="wrap_content"
 			android:text="@string/latitude"/>
 		<EditText
@@ -273,7 +273,7 @@
 		<TextView
 			android:layout_width="0dp"
 			android:layout_weight="3"
-			android:id="@+id/lattext"
+			android:id="@+id/zonetext"
 			android:layout_height="wrap_content"
 			android:text="@string/utmZone"/>
 		<EditText

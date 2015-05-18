@@ -7,7 +7,7 @@
 			android:id="@+id/acbar_status"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
-			android:text="status"
+			android:text=""
 		/> 
 		<TextView
 			xmlns:android="http://schemas.android.com/apk/res/android"
@@ -15,7 +15,7 @@
 			android:id="@+id/acbar_freetext"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
-			android:text="freetexts"
+			android:text=""
 		/>
 	</LinearLayout>	
 	
