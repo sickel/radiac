@@ -24,16 +24,16 @@ import org.json.*;
 // done upload data - done as get
 // todo upload with post
 // done save data
-// todo settings - started 
-// todo rewrite settings to use fragments
+// done settings - started 
 // done reset ui without uploading data 
 // todo unique unlock code
 // todo remote kill
 // todo activity for sample registration
 // done select unit 
+// todo dose registration form
 // done check if unit is set
 // done upload unit
-// todo bigrapportaktivotet
+
 
 public class MainActivity extends Activity
 

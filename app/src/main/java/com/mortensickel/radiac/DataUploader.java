@@ -26,7 +26,7 @@ public class DataUploader extends AsyncTask<HashMap<String,String>, Void,Integer
 	private Context context;
 	
 	
-	// todo: push this into a create method
+	
 	public DataUploader(String url, String errfile,Context ctx){
 		this.context=ctx;
 		this.errorfile=errfile;
@@ -57,6 +57,7 @@ public class DataUploader extends AsyncTask<HashMap<String,String>, Void,Integer
 			BufferedReader in=new BufferedReader(new InputStreamReader(conn.getInputStream()));
 			String inputLine;
 			while((inputLine = in.readLine())!=null) {
+				// todo remote kill comes here
 				// reading the servers answer. Ignoring what we get. May check for correct return later
 				// Toast.makeText(getApplicationContext(), "result " + inputLine, Toast.LENGTH_LONG).show();
 			}
