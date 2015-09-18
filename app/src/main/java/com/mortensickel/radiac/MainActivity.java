@@ -33,7 +33,7 @@ import org.json.*;
 // todo dose registration form
 // done check if unit is set
 // done upload unit
-
+// todo handle.quitting
 
 public class MainActivity extends Activity
 
@@ -102,13 +102,19 @@ public class MainActivity extends Activity
 		ft.setText("");
 	}
 
-
+	protected void saveStatus(){
+		HashMap params=new HashMap<String,String>();
+		params=collectParams();
+		JSONObject json=new JSONObject(params);
+	}
+	
 	@Override
 	protected void onStop(){
 		if(lServiceBound){		
 			stopGPS();
 		}
 		super.onStop();
+	
 	}
 
 
@@ -427,49 +433,10 @@ public void readgps(){
 		if(u.isEnabled()){
 			resetUi();
 		}else{
-			// todo store data
 			enableFields(false);
 			HashMap params=new HashMap<String,String>();
-		params.put("uuid",uuid);
-	//	debug("here");
-		// todo time, name, patrulje
-		for(Integer i: allItems){
-			View vi=findViewById(i);
-			String key=getResources().getResourceEntryName(i);
-			String value="";
-			String clss =vi.getClass().getName();
-			switch(clss){
-			case "android.widget.EditText":
-				EditText et=(EditText)vi;
-				value=et.getText().toString();
-				break;
-			
-			case "android.widget.CheckBox":
-				CheckBox cb=(CheckBox)vi;
-				if(cb.isChecked()){
-					value="True";
-				}else{
-					value="False";
-				}
-				break;
-			
-		    case "android.widget.Spinner":
-				Spinner sp=(Spinner)vi;
-				value=sp.getSelectedItem().toString();
-				break;
-			default:
-				debug(clss);
-				break;
-			}
-			params.put(key,value);
-	
-			//ongoing
-		}
-		JSONObject json=new JSONObject(params);
-		//	debug(json.toString());
-		//Toast.makeText(context,json.toString(),Toast.LENGTH_LONG);
-		//json.putAll(params);
-		new DataUploader(uploadUrl,errorfile,context).execute(params);
+			params=collectParams();
+			new DataUploader(uploadUrl,errorfile,context).execute(params);
 		}
 	}
 	
@@ -512,7 +479,47 @@ public void readgps(){
 		View undo = findViewById(R.id.btUndo);
 		undo.setEnabled(!(ena));
 	}
-	
+
+ public HashMap collectParams(){
+	 HashMap params=new HashMap<String,String>();
+	 params.put("uuid",uuid);
+	 //	debug("here");
+	 // todo time, name, patrulje
+	 for(Integer i: allItems){
+		 View vi=findViewById(i);
+		 String key=getResources().getResourceEntryName(i);
+		 String value="";
+		 String clss =vi.getClass().getName();
+		 switch(clss){
+			 case "android.widget.EditText":
+				 EditText et=(EditText)vi;
+				 value=et.getText().toString();
+				 break;
+
+			 case "android.widget.CheckBox":
+				 CheckBox cb=(CheckBox)vi;
+				 if(cb.isChecked()){
+					 value="True";
+				 }else{
+					 value="False";
+				 }
+				 break;
+
+			 case "android.widget.Spinner":
+				 Spinner sp=(Spinner)vi;
+				 value=sp.getSelectedItem().toString();
+				 break;
+			 default:
+				 debug(clss);
+				 break;
+		 }
+		 params.put(key,value);
+
+		 //ongoing
+	 }
+//	 
+	 return(params);
+ }	
 	
 	public class LockedAppException extends Exception {
 		public LockedAppException(String msg) {

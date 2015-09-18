@@ -16,6 +16,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.URL;
 import java.net.URLConnection;
+import org.json.*;
 
 public class DataUploader extends AsyncTask<HashMap<String,String>, Void,Integer>{
 
@@ -54,6 +55,11 @@ public class DataUploader extends AsyncTask<HashMap<String,String>, Void,Integer
 			URL url = new URL(urlString+"?"+params);
 
 			URLConnection conn = url.openConnection();
+			conn.setDoOutput(true); 
+			JSONObject json=new JSONObject(paramset);  
+			java.io.OutputStreamWriter wr = new java.io.OutputStreamWriter(conn.getOutputStream());
+			wr.write(json.toString());
+			wr.flush();
 			BufferedReader in=new BufferedReader(new InputStreamReader(conn.getInputStream()));
 			String inputLine;
 			while((inputLine = in.readLine())!=null) {
