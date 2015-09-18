@@ -58,7 +58,9 @@ public class MainActivity extends Activity
 	private String errorfile="errors.log";
 	private String logfile="logfile.log";
 	private LocationService lService; 
-
+	private final static String BUFFERSTATUS = "BUFFERSTATUS";
+	
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
     {
@@ -106,10 +108,21 @@ public class MainActivity extends Activity
 		HashMap params=new HashMap<String,String>();
 		params=collectParams();
 		JSONObject json=new JSONObject(params);
+
+		File status = new File(context.getFilesDir(), BUFFERSTATUS);
+		try {
+			FileOutputStream out = new FileOutputStream(status);
+			out.write(json.toString().getBytes());
+			out.close();
+				
+		} catch (Exception e) {
+			throw new RuntimeException(e);
+		}		
 	}
 	
 	@Override
 	protected void onStop(){
+		saveStatus();
 		if(lServiceBound){		
 			stopGPS();
 		}
