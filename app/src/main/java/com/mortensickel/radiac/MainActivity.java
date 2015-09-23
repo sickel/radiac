@@ -10,6 +10,9 @@ import android.view.*;
 import android.widget.*;
 import com.mortensickel.radiac.LocationService.*;
 import java.io.*;
+import java.nio.*;
+import java.nio.charset.Charset;
+import java.nio.channels.FileChannel;
 import java.text.*;
 import java.util.*;
 import org.json.*;
@@ -102,8 +105,28 @@ public class MainActivity extends Activity
 		ft.setText("");	
 		ft=(TextView)findViewById(R.id.acbar_status);
 		ft.setText("");
+		restoreStatus();
 	}
 
+	protected void restoreStatus(){
+		try{
+			File status = new File(context.getFilesDir(), BUFFERSTATUS);
+			if(status.exists()){
+				FileInputStream statusstr = new FileInputStream(status);
+				String jsonStr = null;	
+				FileChannel fc = statusstr.getChannel();
+				MappedByteBuffer bb = fc.map(FileChannel.MapMode.READ_ONLY, 0, fc.size());
+				jsonStr = Charset.defaultCharset().decode(bb).toString();
+				debug(jsonStr);	
+				status.delete();
+			}
+		}
+		catch(Exception e){
+			
+		}
+	}
+	
+	
 	protected void saveStatus(){
 		HashMap params=new HashMap<String,String>();
 		params=collectParams();
