@@ -118,8 +118,33 @@ public class MainActivity extends Activity
 				MappedByteBuffer bb = fc.map(FileChannel.MapMode.READ_ONLY, 0, fc.size());
 				jsonStr = Charset.defaultCharset().decode(bb).toString();
 				debug(jsonStr);	
+				JSONObject jstatus = new JSONObject(jsonStr);
+				Iterator<String> iter = jstatus.keys();
+				while (iter.hasNext()) {
+					String key = iter.next();
+					try {
+						Object value = jstatus.get(key);
+						int rid=this.getResources().getIdentifier(key, "id",context.getPackageName());
+						Object ft=findViewById(rid);
+			
+						if (ft!=null){ 
+						  if( ft.getClass().equals(EditText.class)) {
+							((EditText)ft).setText((String)value);
+					   	}
+				   	
+}
+					} catch (JSONException e) {
+						Toast.makeText(context,R.string.jsonerror,Toast.LENGTH_LONG).show();
+						// Something went wrong!
+					}
+				    	
+				}
+				debug("restored");
 				status.delete();
+				
+			//	debug((String)jstatus.get("etLocname"));
 			}
+			
 		}
 		catch(Exception e){
 			

@@ -60,4 +60,5 @@
 	<string name="menu_unlock">Lås opp</string>
 	<string name="noDataFound">Ingen data å lese</string>
 	<string name="setsNotUploaded">målinger som ikke er lastet opp</string>
+	<string name="jsonerror">Kan ikke håndtere innlagte data</string>
 	</resources>
