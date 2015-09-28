@@ -117,7 +117,7 @@ public class MainActivity extends Activity
 				FileChannel fc = statusstr.getChannel();
 				MappedByteBuffer bb = fc.map(FileChannel.MapMode.READ_ONLY, 0, fc.size());
 				jsonStr = Charset.defaultCharset().decode(bb).toString();
-				debug(jsonStr);	
+			//	debug(jsonStr);	
 				JSONObject jstatus = new JSONObject(jsonStr);
 				Iterator<String> iter = jstatus.keys();
 				while (iter.hasNext()) {
@@ -130,7 +130,10 @@ public class MainActivity extends Activity
 						if (ft!=null){ 
 						  if( ft.getClass().equals(EditText.class)) {
 							((EditText)ft).setText((String)value);
-					   	}
+					   	   }
+						  if(ft.getClass().equals(CheckBox.class)){
+							  ((CheckBox)ft).setChecked(value.equals("True"));
+						  }
 				   	
 }
 					} catch (JSONException e) {
@@ -391,9 +394,12 @@ public class MainActivity extends Activity
 		enableFields(true);
 		findViewById(R.id.btStopMeasure).setEnabled(true);
 		findViewById(R.id.etMeasValue).setEnabled(false);
-		startTime=Calendar.getInstance();
 		EditText st=(EditText)findViewById(R.id.etTimeFrom);
-		st.setText(sdtHhmmss.format(startTime.getTime()));
+		if(st.getText().toString().trim().length() == 0){
+		//	if this is used to unlock, starttime should not be reset
+			startTime=Calendar.getInstance();			
+			st.setText(sdtHhmmss.format(startTime.getTime()));
+		}
 	//	startGPS();
 		}
 	
