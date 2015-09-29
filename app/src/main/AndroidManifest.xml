@@ -1,26 +1,49 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.mortensickel.radiac" >
-	<uses-permission android:name="android.permission.INTERNET" /> 
-	<uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" /> 
-	
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+
     <application
         android:allowBackup="true"
         android:icon="@drawable/sivprot"
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
-		<activity android:name=".UserSettingsActivity" />
-		<activity
+        <activity android:name=".UserSettingsActivity" />
+        <activity
             android:name=".MainActivity"
             android:label="@string/app_name"
-			android:screenOrientation="portrait"	>
-			<intent-filter>
+            android:screenOrientation="portrait" >
+            <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-		<service android:name="com.mortensickel.radiac.LocationService" />
+
+        <service android:name=".LocationService" />
+
+        <activity
+            android:name=".samplereg"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:label="@string/title_activity_samplereg"
+            android:parentActivityName=".MainActivity"
+            android:theme="@style/FullscreenTheme" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.mortensickel.radiac.MainActivity" />
+        </activity>
+        <activity
+            android:name=".doseregistration"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:label="@string/title_activity_doseregistration"
+            android:parentActivityName=".MainActivity"
+            android:theme="@style/FullscreenTheme" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.mortensickel.radiac.MainActivity" />
+        </activity>
     </application>
 
 </manifest>

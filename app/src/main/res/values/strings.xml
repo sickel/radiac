@@ -61,4 +61,13 @@
 	<string name="noDataFound">Ingen data å lese</string>
 	<string name="setsNotUploaded">målinger som ikke er lastet opp</string>
 	<string name="jsonerror">Kan ikke håndtere innlagte data</string>
+
+    <string name="title_activity_samplereg">Prøveregistrering</string>
+    <string name="dummy_button">Dummy Button</string>
+    <string name="dummy_content">DUMMY\nCONTENT</string>
+	<string name="startregister">Start registrering</string>
+	<string name="stopregister">Stopp registering</string>
+	<string name="name">Navn</string>
+
+	<string name="title_activity_doseregistration">Doseregistrering</string>
 	</resources>
