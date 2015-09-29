@@ -36,7 +36,7 @@ import org.json.*;
 // todo dose registration form
 // done check if unit is set
 // done upload unit
-// todo handle.quitting
+// done handle.quitting
 
 public class MainActivity extends Activity
 
@@ -123,17 +123,22 @@ public class MainActivity extends Activity
 				while (iter.hasNext()) {
 					String key = iter.next();
 					try {
-						Object value = jstatus.get(key);
+						String value = (String)jstatus.get(key);
 						int rid=this.getResources().getIdentifier(key, "id",context.getPackageName());
 						Object ft=findViewById(rid);
 			
 						if (ft!=null){ 
 						  if( ft.getClass().equals(EditText.class)) {
-							((EditText)ft).setText((String)value);
+							((EditText)ft).setText(value);
 					   	   }
 						  if(ft.getClass().equals(CheckBox.class)){
 							  ((CheckBox)ft).setChecked(value.equals("True"));
 						  }
+					  	if(ft.getClass().equals(Spinner.class)){
+							Spinner sp=(Spinner)ft;
+							sp.setSelection(((ArrayAdapter<String>)sp.getAdapter()).getPosition(value));
+						}
+							
 				   	
 }
 					} catch (JSONException e) {
