@@ -49,32 +49,29 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:orientation ="horizontal"
-        android:background="#c0c0c0"
-        android:gravity="bottom"
-        >
+        android:orientation ="horizontal">
         <TextView
             android:layout_width="0dp"
             android:layout_weight="3"
             android:layout_height="wrap_content"
-            android:text=""/>
+            android:text="@string/sex"/>
+        <EditText
+            android:layout_width="0dp"
+            android:layout_weight="7"
+            android:enabled="false"
+            android:layout_height="wrap_content"
+            android:id="@+id/etSex"/>
         <TextView
             android:layout_width="0dp"
             android:layout_weight="3"
             android:layout_height="wrap_content"
-            android:text="@string/from"/>
-
-        <TextView
+            android:text="@string/age"/>
+        <EditText
             android:layout_width="0dp"
-            android:layout_weight="1"
+            android:layout_weight="7"
+            android:enabled="false"
             android:layout_height="wrap_content"
-            android:text="-"/>
-        <TextView
-            android:layout_width="0dp"
-            android:layout_weight="3"
-            android:layout_height="wrap_content"
-            android:text="@string/to"/>
-
+            android:id="@+id/etAge"/>
     </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
@@ -85,39 +82,7 @@
             android:layout_width="0dp"
             android:layout_weight="3"
             android:layout_height="wrap_content"
-            android:text="@string/LocName"/>
-        <EditText
-            android:layout_width="0dp"
-            android:layout_weight="3"
-            android:enabled="false"
-            android:layout_height="wrap_content"
-            android:id="@+id/etLocFrom"/>
-        <TextView
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="wrap_content"
-            android:text="-"/>
-        <EditText
-            android:layout_width="0dp"
-            android:layout_weight="3"
-            android:enabled="false"
-            android:layout_height="wrap_content"
-            android:id="@+id/etLocTo"/>
-    </LinearLayout>
-    <View
-        android:layout_width="fill_parent"
-        android:layout_height="2dp"
-        android:background="#c0c0c0"/>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:orientation ="horizontal">
-        <TextView
-            android:layout_width="0dp"
-            android:layout_weight="3"
-            android:layout_height="wrap_content"
-            android:text="@string/meastime"/>
+            android:text="@string/measResult"/>
         <EditText
             android:layout_width="0dp"
             android:layout_weight="3"
@@ -128,96 +93,17 @@
             android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_height="wrap_content"
-            android:text="-"/>
-        <EditText
+            android:text="S-1"/>
+
+         <CheckBox
+            android:id="@+id/cbRainBefore"
             android:layout_width="0dp"
             android:layout_weight="3"
-            android:enabled="false"
             android:layout_height="wrap_content"
-            android:id="@+id/etTimeTo"/>
-    </LinearLayout>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:orientation ="horizontal">
-        <TextView
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="wrap_content"
-            android:text=""/>
-        <TextView
-            android:layout_width="0dp"
-            android:layout_weight="2"
-            android:layout_height="wrap_content"
-            android:text="@string/total"/>
-        <EditText
-            android:layout_width="0dp"
-            android:layout_weight="7"
-            android:enabled="false"
-            android:layout_height="wrap_content"
-            android:id="@+id/etPerson"/>
+            android:text="@string/needsCleaning"
+            android:onClick="onMeastypeClicked"		/>
     </LinearLayout>
 
-    <View
-        android:layout_width="fill_parent"
-        android:layout_height="2dp"
-        android:background="#c0c0c0"/>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:orientation ="horizontal">
-        <TextView
-            android:layout_width="0dp"
-            android:layout_weight="3"
-            android:layout_height="wrap_content"
-            android:text="@string/dose"/>
-        <EditText
-            android:layout_width="0dp"
-            android:layout_weight="3"
-            android:enabled="false"
-            android:layout_height="wrap_content"
-            android:id="@+id/etDoseFrom"/>
-        <TextView
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="wrap_content"
-            android:text="-"/>
-        <EditText
-            android:layout_width="0dp"
-            android:layout_weight="3"
-            android:enabled="false"
-            android:layout_height="wrap_content"
-            android:id="@+id/etDoseTo"/>
-    </LinearLayout>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:orientation ="horizontal">
-        <TextView
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="wrap_content"
-            android:text=""/>
-        <TextView
-            android:layout_width="0dp"
-            android:layout_weight="2"
-            android:layout_height="wrap_content"
-            android:text="@string/total"/>
-        <EditText
-            android:layout_width="0dp"
-            android:layout_weight="7"
-            android:enabled="false"
-            android:layout_height="wrap_content"
-            android:id="@+id/etPerson"/>
-    </LinearLayout>
-    <View
-        android:layout_width="fill_parent"
-        android:layout_height="2dp"
-        android:background="#c0c0c0"/>
 
     <LinearLayout
         android:layout_width="match_parent"

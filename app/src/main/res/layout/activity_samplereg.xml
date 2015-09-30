@@ -36,17 +36,33 @@
             android:orientation ="horizontal">
 
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
+                android:layout_weight="3"
                 android:layout_height="49dp"
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:text="Sampletype"
                 android:id="@+id/textView" />
 
             <Spinner
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
+                android:layout_weight="3"
                 android:layout_height="wrap_content"
                 android:id="@+id/spinner" />
 
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_weight="3"
+                android:id="@+id/zonetext"
+                android:layout_height="wrap_content"
+                android:text="@string/sampleNumber"/>
+            <EditText
+                android:layout_width="0dp"
+                android:layout_weight="2"
+                android:enabled="false"
+                android:inputType="numberDecimal"
+                android:layout_height="wrap_content"
+                android:id="@+id/etSampleNumber"/>
         </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
@@ -57,19 +73,164 @@
                 android:layout_width="0dp"
                 android:layout_weight="3"
                 android:layout_height="wrap_content"
-                android:text="@string/comment"/>
+                android:text="@string/LocName"/>
             <EditText
                 android:layout_width="0dp"
                 android:layout_weight="7"
                 android:enabled="false"
                 android:layout_height="wrap_content"
-                android:id="@+id/etComment"/>
+                android:id="@+id/etLocname"/>
         </LinearLayout>
 
-        <View
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="2
+            "
+            android:orientation ="horizontal">
+            <TextView
+                android:layout_width="0dp"
+                android:layout_weight="3"
+                android:layout_height="wrap_content"
+                android:text="@string/areaObs"/>
+            <EditText
+                android:layout_width="0dp"
+                android:layout_weight="7"
+                android:enabled="false"
+                android:layout_height="match_parent"
+                android:id="@+id/etAreaObservation"/>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="2"
+            android:orientation ="horizontal">
+            <TextView
+                android:layout_width="0dp"
+                android:layout_weight="3"
+                android:layout_height="wrap_content"
+                android:text="@string/weatherObs"/>
+            <EditText
+                android:layout_width="0dp"
+                android:layout_weight="7"
+                android:enabled="false"
+                android:layout_height="match_parent"
+                android:id="@+id/etWeatherObservation"/>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="2"
+            android:orientation ="horizontal">
+            <TextView
+                android:layout_width="0dp"
+                android:layout_weight="3"
+                android:layout_height="wrap_content"
+                android:text="@string/comment"/>
+            <EditText
+                android:layout_width="0dp"
+                android:layout_weight="7"
+                android:enabled="false"
+                android:layout_height="match_parent"
+                android:id="@+id/etComment"/>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:orientation ="horizontal">
+            <TextView
+                android:layout_width="0dp"
+                android:layout_weight="4"
+                android:layout_height="wrap_content"
+                android:text="@string/background"/>
+            <EditText
+                android:layout_width="0dp"
+                android:enabled="false"
+                android:layout_weight="3"
+                android:inputType="numberDecimal"
+                android:layout_height="wrap_content"
+                android:id="@+id/etMeasValue"/>
+            <Spinner
+                android:id="@+id/spUnit"
+                android:layout_width="0dp"
+                android:layout_weight="5"
+                android:layout_height="wrap_content"
+                android:entries="@array/unitItems"
+                android:enabled="false"
+                android:prompt="@string/unitPrompt" />
+            <!--	<TextView
+                    android:layout_width="0dp"
+                    android:layout_weight="2"
+                    android:layout_height="wrap_content"
+                    android:text="@string/microGyh"/>
+        -->
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:orientation ="horizontal">
+            <TextView
+                android:layout_width="0dp"
+                android:layout_weight="3"
+                android:layout_height="wrap_content"
+                android:text="@string/snowSampleData"/>
+            <EditText
+                android:layout_width="0dp"
+                android:layout_weight="3"
+                android:enabled="false"
+                android:layout_height="wrap_content"
+                android:id="@+id/etWeight"/>
+            <TextView
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:text="@string/kg"/>
+            <EditText
+                android:layout_width="0dp"
+                android:layout_weight="3"
+                android:enabled="false"
+                android:layout_height="wrap_content"
+                android:id="@+id/etTimeTo"/>
+            <TextView
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:text="@string/l"/>
+
+        </LinearLayout><View
             android:layout_width="fill_parent"
             android:layout_height="2dp"
             android:background="#c0c0c0"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:orientation ="horizontal">
+            <TextView
+                android:layout_width="0dp"
+                android:layout_weight="3"
+                android:layout_height="wrap_content"
+                android:text="@string/samplingTime"/>
+            <EditText
+                android:layout_width="0dp"
+                android:layout_weight="3"
+                android:enabled="false"
+                android:layout_height="wrap_content"
+                android:id="@+id/etTimeFrom"/>
+            <TextView
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:text="-"/>
+            <EditText
+                android:layout_width="0dp"
+                android:layout_weight="3"
+                android:enabled="false"
+                android:layout_height="wrap_content"
+                android:id="@+id/etTimeTo"/>
+        </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
