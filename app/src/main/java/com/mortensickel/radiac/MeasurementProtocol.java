@@ -10,7 +10,7 @@ import android.os.Handler;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.MenuItem;
-import android.support.v4.app.NavUtils;
+// import android.support.v4.app.NavUtils;
 
 
 /**
@@ -50,7 +50,7 @@ public class MeasurementProtocol extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+   /*     super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_measurement_protocol);
         setupActionBar();
@@ -115,7 +115,7 @@ public class MeasurementProtocol extends Activity {
         // Upon interacting with UI controls, delay any scheduled hide()
         // operations to prevent the jarring behavior of controls going away
         // while interacting with the UI.
-        findViewById(R.id.dummy_button).setOnTouchListener(mDelayHideTouchListener);
+        findViewById(R.id.dummy_button).setOnTouchListener(mDelayHideTouchListener); */
     }
 
     @Override
@@ -152,7 +152,7 @@ public class MeasurementProtocol extends Activity {
             //
             // TODO: If Settings has multiple levels, Up should navigate up
             // that hierarchy.
-            NavUtils.navigateUpFromSameTask(this);
+          //  NavUtils.navigateUpFromSameTask(this);
             return true;
         }
         return super.onOptionsItemSelected(item);
