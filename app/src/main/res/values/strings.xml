@@ -68,6 +68,22 @@
 	<string name="startregister">Start registrering</string>
 	<string name="stopregister">Stopp registering</string>
 	<string name="name">Navn</string>
-
+	<string name="weatherObs">Vær- observasjoner</string>
+	<string name="areaObs">Område- observasjoner</string>
+	<string name="samplingTime">Tidspunkt</string>
+	<string name="sampleNumber">Prøvenummer</string>
+	<string name="background">Bakgrunnsstråling</string>
+	<string name="snowSampleData">For snøprøve</string>
+	<string name="kg">kg</string>
+	<string name="l">l</string>
+	<string name="sex">Kjønn</string>
+	<string name="age">Alder</string>
 	<string name="title_activity_doseregistration">Doseregistrering</string>
+	<string name="dose">Dose</string>
+	<string name="from">Fra</string>
+	<string name="to">Til</string>
+	<string name="measResult">Måleresultat</string>
+	<string name="needsCleaning">Trenger rensing</string>
+	<string name="total">Totalt</string>
+    <string name="title_activity_measurement_protocol">Måleprotokoll</string>
 	</resources>
