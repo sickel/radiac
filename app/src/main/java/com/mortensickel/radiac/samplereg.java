@@ -10,6 +10,17 @@ import android.os.Handler;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.MenuItem;
+import android.os.*;
+import android.preference.*;
+import android.text.*;
+import android.view.*;
+import android.widget.*;
+
+import android.app.*;
+import android.content.*;
+
+
+
 //import android.support.v4.app.NavUtils;
 
 
@@ -24,34 +35,42 @@ public class samplereg extends Activity {
      * Whether or not the system UI should be auto-hidden after
      * {@link #AUTO_HIDE_DELAY_MILLIS} milliseconds.
      */
-    private static final boolean AUTO_HIDE = true;
+  //  private static final boolean AUTO_HIDE = true;
 
     /**
      * If {@link #AUTO_HIDE} is set, the number of milliseconds to wait after
      * user interaction before hiding the system UI.
      */
-    private static final int AUTO_HIDE_DELAY_MILLIS = 3000;
+//    private static final int AUTO_HIDE_DELAY_MILLIS = 3000;
 
     /**
      * If set, will toggle the system UI visibility upon interaction. Otherwise,
      * will show the system UI visibility upon interaction.
      */
-    private static final boolean TOGGLE_ON_CLICK = true;
+//    private static final boolean TOGGLE_ON_CLICK = true;
 
     /**
      * The flags to pass to {@link SystemUiHider#getInstance}.
      */
-    private static final int HIDER_FLAGS = SystemUiHider.FLAG_HIDE_NAVIGATION;
+//    private static final int HIDER_FLAGS = SystemUiHider.FLAG_HIDE_NAVIGATION;
 
     /**
      * The instance of the {@link SystemUiHider} for this activity.
      */
-    private SystemUiHider mSystemUiHider;
+//    private SystemUiHider mSystemUiHider;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.activity_samplereg);
+	
+		ActionBar actionBar = getActionBar();
+        assert actionBar != null;
+        actionBar.setCustomView(R.layout.actionbar);
+		actionBar.setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM | ActionBar.DISPLAY_SHOW_HOME);	
+		
     }
-
+/*
     @Override
     protected void onPostCreate(Bundle savedInstanceState) {
         super.onPostCreate(savedInstanceState);
@@ -59,12 +78,12 @@ public class samplereg extends Activity {
         // Trigger the initial hide() shortly after the activity has been
         // created, to briefly hint to the user that UI controls
         // are available.
-        delayedHide(100);
+   //     delayedHide(100);
     }
 
     /**
      * Set up the {@link android.app.ActionBar}, if the API is available.
-     */
+     
     @TargetApi(Build.VERSION_CODES.HONEYCOMB)
     private void setupActionBar() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
@@ -96,7 +115,7 @@ public class samplereg extends Activity {
      * Touch listener to use for in-layout UI controls to delay hiding the
      * system UI. This is to prevent the jarring behavior of controls going away
      * while interacting with activity UI.
-     */
+     
     View.OnTouchListener mDelayHideTouchListener = new View.OnTouchListener() {
         @Override
         public boolean onTouch(View view, MotionEvent motionEvent) {
@@ -118,9 +137,10 @@ public class samplereg extends Activity {
     /**
      * Schedules a call to hide() in [delay] milliseconds, canceling any
      * previously scheduled calls.
-     */
+     
     private void delayedHide(int delayMillis) {
         mHideHandler.removeCallbacks(mHideRunnable);
         mHideHandler.postDelayed(mHideRunnable, delayMillis);
     }
+	*/
 }

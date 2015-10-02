@@ -278,6 +278,9 @@ public class MainActivity extends Activity
 			case R.id.menu_unlock:
 			
 				break;
+		    case R.id.menu_samplereg:
+				openSamplereg();
+				break;
 			case R.id.menu_resetui:
 				AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(context);
 				alertDialogBuilder.setTitle("");
@@ -300,13 +303,28 @@ public class MainActivity extends Activity
 				AlertDialog alertDialog = alertDialogBuilder.create();
 				alertDialog.show();
 				break;
-
+			case R.id.menu_dosereg:
+				startActivity(new Intent(this, doseregistration.class));
+				break;
 
         }
 
         return true;
     }
-	
+	public void openSamplereg(){
+		try{
+			//Intent intent = new Intent(this, samplereg.class);
+			//   startActivity(new Intent(this, SecondScreenActivity.class));;
+			
+			//intent.setClassName(MainActivity.this, samplereg.class);
+     //   startActivity(intent);
+	 		startActivity(new Intent(this, samplereg.class));
+		}
+		catch(Exception e){
+			e.printStackTrace();
+		}
+      //  return true;   
+	}
 	public void saveObs(){
 		/* Reading log of observations and reupload those that are not uploaded
 		 */

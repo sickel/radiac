@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-
-    <string name="app_name">radiac</string>
+	<string name="menu_samplereg">Prøveregistrering</string>
+	<string name="menu_dosereg">Doseregistrering</string>
+	<string name="menu_contamreg">Måleprotokoll (personer)</string>
+	<string name="app_name">radiac</string>
     <string name="referanse">Referansemåling</string>
 	<string name="othermeasurement">Annen måling</string>
 	<string name="startmeasure">Start måling</string>
@@ -50,6 +52,12 @@
 	<array name="projections">
 		<item>UTM</item>
 		<item>Geografisk</item>
+	</array>
+	<array name="sampletypes">
+		<item>Vann</item>
+		<item>Jord</item>
+		<item>Vegetasjon</item>
+		<item>Snø</item>
 	</array>
 	<string  name="projection">Koordinattype</string>
 	<string name="unitPrompt">Måleenhet</string>

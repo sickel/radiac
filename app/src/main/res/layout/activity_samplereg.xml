@@ -41,19 +41,21 @@
                 android:layout_height="49dp"
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:text="Sampletype"
-                android:id="@+id/textView" />
+                android:id="@+id/tvSampletype" />
 
             <Spinner
                 android:layout_width="0dp"
                 android:layout_weight="3"
                 android:layout_height="wrap_content"
-                android:id="@+id/spinner" />
+                android:id="@+id/spSampletype"
+				android:entries="@array/sampletypes"
+				/>
 
 
             <TextView
                 android:layout_width="0dp"
                 android:layout_weight="3"
-                android:id="@+id/zonetext"
+                android:id="@+id/tvSampleNumber"
                 android:layout_height="wrap_content"
                 android:text="@string/sampleNumber"/>
             <EditText
@@ -159,12 +161,6 @@
                 android:entries="@array/unitItems"
                 android:enabled="false"
                 android:prompt="@string/unitPrompt" />
-            <!--	<TextView
-                    android:layout_width="0dp"
-                    android:layout_weight="2"
-                    android:layout_height="wrap_content"
-                    android:text="@string/microGyh"/>
-        -->
         </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
@@ -192,7 +188,7 @@
                 android:layout_weight="3"
                 android:enabled="false"
                 android:layout_height="wrap_content"
-                android:id="@+id/etTimeTo"/>
+                android:id="@+id/etSnowVolume"/>
             <TextView
                 android:layout_width="0dp"
                 android:layout_weight="1"

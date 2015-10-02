@@ -23,17 +23,19 @@
         </activity>
 
         <service android:name=".LocationService" />
-
+	
+			
+			<!--     android:configChanges="orientation|keyboardHidden|screenSize"
+		android:parentActivityName=".MainActivity"
+		android:theme="@style/FullscreenTheme" >
+		<meta-data
+		android:name="android.support.PARENT_ACTIVITY"
+		android:value="com.mortensickel.radiac.MainActivity" />
+        </activity>-->	
         <activity
             android:name=".samplereg"
-            android:configChanges="orientation|keyboardHidden|screenSize"
-            android:label="@string/title_activity_samplereg"
-            android:parentActivityName=".MainActivity"
-            android:theme="@style/FullscreenTheme" >
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.mortensickel.radiac.MainActivity" />
-        </activity>
+       android:label="@string/title_activity_samplereg" />
+            
         <activity
             android:name=".doseregistration"
             android:configChanges="orientation|keyboardHidden|screenSize"

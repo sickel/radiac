@@ -50,12 +50,12 @@ public class doseregistration extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-       /* super.onCreate(savedInstanceState);
+       super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_doseregistration);
         setupActionBar();
 
-        final View controlsView = findViewById(R.id.fullscreen_content_controls);
+     /*   final View controlsView = findViewById(R.id.fullscreen_content_controls);
         final View contentView = findViewById(R.id.fullscreen_content);
 
         // Set up an instance of SystemUiHider to control the system UI for
@@ -125,7 +125,7 @@ public class doseregistration extends Activity {
         // Trigger the initial hide() shortly after the activity has been
         // created, to briefly hint to the user that UI controls
         // are available.
-        delayedHide(100);
+     //   delayedHide(100);
     }
 
     /**

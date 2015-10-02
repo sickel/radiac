@@ -16,5 +16,15 @@
 	<item
         android:id="@+id/menu_unlock"
         android:title="@string/menu_unlock" />
+	<item 
+		android:id="@+id/menu_samplereg"
+		android:title="@string/menu_samplereg"/>
+	<item 
+		android:id="@+id/menu_dosereg"
+		android:title="@string/menu_dosereg"/>
+	<item 
+		android:id="@+id/menu_contamreg"
+		android:title="@string/menu_contamreg"/>
+	
 	
 </menu>
