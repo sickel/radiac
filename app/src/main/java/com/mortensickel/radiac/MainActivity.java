@@ -38,7 +38,7 @@ import org.json.*;
 // done upload unit
 // done handle.quitting
 
-public class MainActivity extends Activity
+public class MainActivity extends RadiacActivity
 
 {
    
@@ -313,18 +313,14 @@ public class MainActivity extends Activity
     }
 	public void openSamplereg(){
 		try{
-			//Intent intent = new Intent(this, samplereg.class);
-			//   startActivity(new Intent(this, SecondScreenActivity.class));;
-			
-			//intent.setClassName(MainActivity.this, samplereg.class);
-     //   startActivity(intent);
 	 		startActivity(new Intent(this, samplereg.class));
 		}
 		catch(Exception e){
 			e.printStackTrace();
 		}
-      //  return true;   
 	}
+	
+	
 	public void saveObs(){
 		/* Reading log of observations and reupload those that are not uploaded
 		 */
@@ -611,11 +607,6 @@ public void readgps(){
 	 return(params);
  }	
 	
-	public class LockedAppException extends Exception {
-		public LockedAppException(String msg) {
-			super(msg);
-		}
-	}
 	
 	
 	

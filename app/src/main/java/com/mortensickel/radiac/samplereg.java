@@ -30,7 +30,7 @@ import android.content.*;
  *
  * @see SystemUiHider
  */
-public class samplereg extends Activity {
+public class samplereg extends RadiacActivity {
     /**
      * Whether or not the system UI should be auto-hidden after
      * {@link #AUTO_HIDE_DELAY_MILLIS} milliseconds.
