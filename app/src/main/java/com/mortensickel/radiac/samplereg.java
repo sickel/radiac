@@ -67,7 +67,8 @@ public class samplereg extends RadiacActivity {
 		ActionBar actionBar = getActionBar();
         assert actionBar != null;
         actionBar.setCustomView(R.layout.actionbar);
-		actionBar.setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM | ActionBar.DISPLAY_SHOW_HOME);	
+		actionBar.setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM | ActionBar.DISPLAY_SHOW_HOME);
+        startbutton=(Button)findViewById(R.id.btStartRegisterSample);
 		
     }
 /*

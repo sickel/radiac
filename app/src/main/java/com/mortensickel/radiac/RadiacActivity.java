@@ -26,9 +26,10 @@ public class RadiacActivity extends Activity
 	
 	
 	private SimpleDateFormat sdtHhmmss = new SimpleDateFormat("HH:mm:ss");	
-	private final List<Integer> mandatory =Arrays.asList(R.id.etAdmname,R.id.etLatitude,R.id.etLocname,R.id.etLongitude,R.id.etMeasValue,R.id.etSnowcover,R.id.etTimeFrom,R.id.etTimeTo);
-	private final List<Integer> allItems= Arrays.asList(R.id.etAdmname,R.id.etLatitude,R.id.etLocname,R.id.etLongitude,R.id.etMeasValue,R.id.etSnowcover,R.id.etTimeFrom,R.id.etTimeTo,R.id.etComment,
+	public List<Integer> mandatory =Arrays.asList(R.id.etAdmname,R.id.etLatitude,R.id.etLocname,R.id.etLongitude,R.id.etMeasValue,R.id.etSnowcover,R.id.etTimeFrom,R.id.etTimeTo);
+	public List<Integer> allItems= Arrays.asList(R.id.etAdmname,R.id.etLatitude,R.id.etLocname,R.id.etLongitude,R.id.etMeasValue,R.id.etSnowcover,R.id.etTimeFrom,R.id.etTimeTo,R.id.etComment,
 														R.id.cbReference,R.id.cbOtherMeasure,R.id.cbRainDuring,R.id.cbRainBefore,R.id.spUnit);
+	public Button startbutton;
 	
 	
 	
@@ -40,7 +41,8 @@ public class RadiacActivity extends Activity
 			Toast.makeText(getApplicationContext(),e.getMessage(),Toast.LENGTH_LONG).show();
 			return;
 		}
-		findViewById(R.id.btStartMeasure).setEnabled(false);
+		// findViewById(R.id.btStartRegisterSample).setEnabled(false);
+		startbutton.setEnabled(false);
 		enableFields(true);
 		findViewById(R.id.btStopMeasure).setEnabled(true);
 		findViewById(R.id.etMeasValue).setEnabled(false);
