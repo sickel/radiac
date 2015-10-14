@@ -17,7 +17,7 @@
                 android:layout_width="0sp"
                 android:layout_weight="1"
                 android:layout_height="wrap_content"
-                android:id="@+id/btStartRegister"
+                android:id="@+id/btStartRegisterSample"
                 android:onClick="onMeasureStart"
                 android:text="@string/startregister" />
             <Button
