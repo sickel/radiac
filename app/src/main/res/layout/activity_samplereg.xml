@@ -38,7 +38,7 @@
             <TextView
                 android:layout_width="0dp"
                 android:layout_weight="3"
-                android:layout_height="49dp"
+                android:layout_height="match_parent"
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:text="Sampletype"
                 android:id="@+id/tvSampletype" />
@@ -105,7 +105,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="2"
+            android:layout_weight="1"
             android:orientation ="horizontal">
             <TextView
                 android:layout_width="0dp"
@@ -122,7 +122,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="2"
+            android:layout_weight="1"
             android:orientation ="horizontal">
             <TextView
                 android:layout_width="0dp"
@@ -152,7 +152,7 @@
                 android:layout_weight="3"
                 android:inputType="numberDecimal"
                 android:layout_height="wrap_content"
-                android:id="@+id/etMeasValue"/>
+                android:id="@+id/etBackground"/>
             <Spinner
                 android:id="@+id/spUnit"
                 android:layout_width="0dp"
@@ -214,18 +214,8 @@
                 android:layout_weight="3"
                 android:enabled="false"
                 android:layout_height="wrap_content"
-                android:id="@+id/etTimeFrom"/>
-            <TextView
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="wrap_content"
-                android:text="-"/>
-            <EditText
-                android:layout_width="0dp"
-                android:layout_weight="3"
-                android:enabled="false"
-                android:layout_height="wrap_content"
-                android:id="@+id/etTimeTo"/>
+                android:id="@+id/etSamplingTime"/>
+           
         </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
@@ -244,7 +234,7 @@
                 android:inputType="numberDecimal"
                 android:enabled="false"
                 android:layout_height="wrap_content"
-                android:id="@+id/etLongitude"/>
+                android:id="@+id/etSampLongitude"/>
             <TextView
                 android:layout_width="0dp"
                 android:layout_weight="2"
@@ -268,7 +258,7 @@
                 android:inputType="numberDecimal"
                 android:enabled="false"
                 android:layout_height="wrap_content"
-                android:id="@+id/etLatitude"/>
+                android:id="@+id/etSampLatitude"/>
             <TextView
                 android:layout_width="0dp"
                 android:layout_weight="2"

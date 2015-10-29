@@ -19,17 +19,29 @@ import android.widget.*;
 import android.app.*;
 import android.content.*;
 
+import android.app.*;
+import android.app.*;
+import android.content.*;
+import android.location.*;
+import android.os.*;
+import android.preference.*;
+import android.text.*;
+import android.view.*;
+import android.widget.*;
+import com.mortensickel.radiac.LocationService.*;
+import java.io.*;
+import java.nio.*;
+import java.nio.charset.Charset;
+import java.nio.channels.FileChannel;
+import java.text.*;
+import java.util.*;
+import org.json.*;
 
 
 //import android.support.v4.app.NavUtils;
 
 
-/**
- * An example full-screen activity that shows and hides the system UI (i.e.
- * status bar and navigation/system bar) with user interaction.
- *
- * @see SystemUiHider
- */
+
 public class samplereg extends RadiacActivity {
     /**
      * Whether or not the system UI should be auto-hidden after
@@ -69,21 +81,22 @@ public class samplereg extends RadiacActivity {
         actionBar.setCustomView(R.layout.actionbar);
 		actionBar.setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM | ActionBar.DISPLAY_SHOW_HOME);
         startbutton=(Button)findViewById(R.id.btStartRegisterSample);
-		
-    }
-/*
+		allItems=Arrays.asList(R.id.spSampletype,R.id.etSampleNumber,R.id.etLocname,
+			R.id.etAreaObservation,R.id.etWeatherObservation,R.id.etComment,
+			R.id.etBackground,R.id.etWeight,R.id.etSnowVolume,R.id.etSamplingTime,
+			R.id.etSampLatitude,R.id.etSampLongitude);
+		mandatory =Arrays.asList();	
+		}
+	
+	
     @Override
     protected void onPostCreate(Bundle savedInstanceState) {
         super.onPostCreate(savedInstanceState);
-
-        // Trigger the initial hide() shortly after the activity has been
-        // created, to briefly hint to the user that UI controls
-        // are available.
-   //     delayedHide(100);
+		
     }
 
-    /**
-     * Set up the {@link android.app.ActionBar}, if the API is available.
+    
+     //* Set up the {@link android.app.ActionBar}, if the API is available. 
      
     @TargetApi(Build.VERSION_CODES.HONEYCOMB)
     private void setupActionBar() {
