@@ -56,8 +56,7 @@ public class MainActivity extends RadiacActivity
 	protected ServiceConnection lServiceConnection;
 	public boolean lServiceBound=false;
 	private String uploadUrl="http://aws.sickel.net/radiac";
-		private LocationService lService; 
-	
+	private LocationService lService; 
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
@@ -84,6 +83,8 @@ public class MainActivity extends RadiacActivity
 		ft.setText("");	
 		ft=(TextView)findViewById(R.id.acbar_status);
 		ft.setText("");
+		stopButton=R.id.btStopMeasure;
+		startTimeField=R.id.etTimeFrom;
 		restoreStatus();
 	}
 
@@ -313,24 +314,18 @@ public class MainActivity extends RadiacActivity
 	}
 	
 	public void onMeasureStart(View v){
-		
-		try{
-			checkLock();
-		}catch(LockedAppException e){
-			Toast.makeText(getApplicationContext(),e.getMessage(),Toast.LENGTH_LONG).show();
-			return;
-		}
-		findViewById(R.id.btStartMeasure).setEnabled(false);
-		enableFields(true);
-		findViewById(R.id.btStopMeasure).setEnabled(true);
-		findViewById(R.id.etMeasValue).setEnabled(false);
+		super.onMeasureStart(v);
+		/*
 		EditText st=(EditText)findViewById(R.id.etTimeFrom);
 		if(st.getText().toString().trim().length() == 0){
 		//	if this is used to unlock, starttime should not be reset
 			startTime=Calendar.getInstance();			
 			st.setText(sdtHhmmss.format(startTime.getTime()));
 		}
-	//	startGPS();
+	//	startGPS();*/
+		findViewById(R.id.btStartMeasure).setEnabled(false);
+		findViewById(R.id.etMeasValue).setEnabled(false);
+		
 		}
 	
 		

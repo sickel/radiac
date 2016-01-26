@@ -85,7 +85,9 @@ public class samplereg extends RadiacActivity {
 			R.id.etAreaObservation,R.id.etWeatherObservation,R.id.etComment,
 			R.id.etBackground,R.id.etWeight,R.id.etSnowVolume,R.id.etSamplingTime,
 			R.id.etSampLatitude,R.id.etSampLongitude);
-		mandatory =Arrays.asList();	
+		mandatory =Arrays.asList(R.id.spSampletype,R.id.etSampleNumber);	
+		stopButton=R.id.btStopRegister;
+		startTimeField=R.id.etSamplingTime;
 		}
 	
 	

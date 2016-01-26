@@ -37,6 +37,8 @@ public class RadiacActivity extends Activity
 	public List<Integer> allItems= Arrays.asList(R.id.etAdmname,R.id.etLatitude,R.id.etLocname,R.id.etLongitude,R.id.etMeasValue,R.id.etSnowcover,R.id.etTimeFrom,R.id.etTimeTo,R.id.etComment,
 														R.id.cbReference,R.id.cbOtherMeasure,R.id.cbRainDuring,R.id.cbRainBefore,R.id.spUnit);
 	public Button startbutton;
+	protected int stopButton;
+	protected int startTimeField;
 	
 //	public RadiacActivity(){}
 	
@@ -192,11 +194,10 @@ public class RadiacActivity extends Activity
 			return;
 		}
 		// findViewById(R.id.btStartRegisterSample).setEnabled(false);
-		startbutton.setEnabled(false);
+		// startbutton.setEnabled(false);
 		enableFields(true);
-		findViewById(R.id.btStopMeasure).setEnabled(true);
-		findViewById(R.id.etMeasValue).setEnabled(false);
-		EditText st=(EditText)findViewById(R.id.etTimeFrom);
+		findViewById(stopButton).setEnabled(true);
+		EditText st=(EditText)findViewById(startTimeField);
 		if(st.getText().toString().trim().length() == 0){
 			//	if this is used to unlock, starttime should not be reset
 			startTime=Calendar.getInstance();			
