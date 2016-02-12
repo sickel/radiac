@@ -5,7 +5,7 @@ import android.content.*;
 import android.location.*;
 import android.os.*;
 import android.preference.*;
-import android.text.*;
+
 import android.view.*;
 import android.widget.*;
 import com.mortensickel.radiac.LocationService.*;
@@ -45,23 +45,21 @@ public class MainActivity extends RadiacActivity
 	
 	private Calendar startTime,stopTime;
 	private SimpleDateFormat sdtHhmmss = new SimpleDateFormat("HH:mm:ss");	
-	private final List<Integer> mandatory =Arrays.asList(R.id.etAdmname,R.id.etLatitude,R.id.etLocname,R.id.etLongitude,R.id.etMeasValue,R.id.etSnowcover,R.id.etTimeFrom,R.id.etTimeTo);
-	private final List<Integer> allItems= Arrays.asList(R.id.etAdmname,R.id.etLatitude,R.id.etLocname,R.id.etLongitude,R.id.etMeasValue,R.id.etSnowcover,R.id.etTimeFrom,R.id.etTimeTo,R.id.etComment,
-	R.id.cbReference,R.id.cbOtherMeasure,R.id.cbRainDuring,R.id.cbRainBefore,R.id.spUnit);
-    private final Integer RESULT_SETTINGS=1;
-	private String user;
+	//public final List<Integer> mandatory =Arrays.asList(R.id.etAdmname,R.id.etLatitude,R.id.etLocname,R.id.etLongitude,R.id.etMeasValue,R.id.etSnowcover,R.id.etTimeFrom,R.id.etTimeTo);
+	//private final List<Integer> allItems= Arrays.asList(R.id.etAdmname,R.id.etLatitude,R.id.etLocname,R.id.etLongitude,R.id.etMeasValue,R.id.etSnowcover,R.id.etTimeFrom,R.id.etTimeTo,R.id.etComment,
+	//R.id.cbReference,R.id.cbOtherMeasure,R.id.cbRainDuring,R.id.cbRainBefore,R.id.spUnit);
+    	private String user;
 	private String patrol;
 	private String unlockkey="";
 	private final Context context=this;
-	protected ServiceConnection lServiceConnection;
-	public boolean lServiceBound=false;
-	private String uploadUrl="http://aws.sickel.net/radiac";
-	private LocationService lService; 
-	
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
     {
-        super.onCreate(savedInstanceState);
+        mandatory =Arrays.asList(R.id.etAdmname,R.id.etLatitude,R.id.etLocname,R.id.etLongitude,R.id.etMeasValue,R.id.etSnowcover,R.id.etTimeFrom,R.id.etTimeTo);
+	    allItems= Arrays.asList(R.id.etAdmname,R.id.etLatitude,R.id.etLocname,R.id.etLongitude,R.id.etMeasValue,R.id.etSnowcover,R.id.etTimeFrom,R.id.etTimeTo,R.id.etComment,
+								R.id.cbReference,R.id.cbOtherMeasure,R.id.cbRainDuring,R.id.cbRainBefore,R.id.spUnit);
+		setContentView(R.layout.main);
+		super.onCreate(savedInstanceState);
 		
 		Thread showtimeThread;
 		showtimeThread = new Thread(myTimerThread);
@@ -79,32 +77,21 @@ public class MainActivity extends RadiacActivity
 				}
 
 			});	*/
+		
 		TextView ft=(TextView)findViewById(R.id.acbar_freetext);
 		ft.setText("");	
 		ft=(TextView)findViewById(R.id.acbar_status);
 		ft.setText("");
 		stopButton=R.id.btStopMeasure;
+		undoButton=R.id.btUndo;
+		startButton=R.id.btStartMeasure;
 		startTimeField=R.id.etTimeFrom;
 		restoreStatus();
 	}
 
 	
 	
-	protected void saveStatus(){
-		HashMap params=new HashMap<String,String>();
-		params=collectParams();
-		JSONObject json=new JSONObject(params);
-
-		File status = new File(context.getFilesDir(), BUFFERSTATUS);
-		try {
-			FileOutputStream out = new FileOutputStream(status);
-			out.write(json.toString().getBytes());
-			out.close();
-				
-		} catch (Exception e) {
-			throw new RuntimeException(e);
-		}		
-	}
+	
 	
 	@Override
 	protected void onStop(){
@@ -117,11 +104,6 @@ public class MainActivity extends RadiacActivity
 	}
 
 
-	protected void  stopGPS(){
-        // TODO: see if it is possible to turn of GPS immediately
-        unbindService(lServiceConnection);
-		lServiceBound=false;
-	}
 	
 	
 	
@@ -134,6 +116,10 @@ public class MainActivity extends RadiacActivity
 	@Override
 	protected void onStart(){
 		super.onStart();
+		mandatory =Arrays.asList(R.id.etAdmname,R.id.etLatitude,R.id.etLocname,R.id.etLongitude,R.id.etMeasValue,R.id.etSnowcover,R.id.etTimeFrom,R.id.etTimeTo);
+	    final List<Integer> allItems= Arrays.asList(R.id.etAdmname,R.id.etLatitude,R.id.etLocname,R.id.etLongitude,R.id.etMeasValue,R.id.etSnowcover,R.id.etTimeFrom,R.id.etTimeTo,R.id.etComment,
+		R.id.cbReference,R.id.cbOtherMeasure,R.id.cbRainDuring,R.id.cbRainBefore,R.id.spUnit);
+		
 		startGPS();
 	}
 	
@@ -191,112 +177,8 @@ public class MainActivity extends RadiacActivity
         return true;
     }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-
-            case R.id.menu_settings:
-                Intent i = new Intent(this, UserSettingsActivity.class);
-                startActivityForResult(i, RESULT_SETTINGS);
-                break;
-			case R.id.menu_upload:
-				saveObs();	
-				break;
-			case R.id.menu_readgps:
-				readgps();
-				break;
-			case R.id.menu_unlock:
-			
-				break;
-		    case R.id.menu_samplereg:
-				openSamplereg();
-				break;
-			case R.id.menu_resetui:
-				AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(context);
-				alertDialogBuilder.setTitle("");
-				alertDialogBuilder
-					.setMessage(getResources().getString(R.string.resetmeasure))
-					.setCancelable(false)
-					.setPositiveButton(getResources().getString(R.string.yes),new DialogInterface.OnClickListener() {
-						public void onClick(DialogInterface dialog,int id) {
-							// if this button is clicked, reset user interface to start new measurement
-							MainActivity.this.enableFields(false);
-							MainActivity.this.resetUi();
-						}
-					})
-					.setNegativeButton(getResources().getString(R.string.no),new DialogInterface.OnClickListener() {
-						public void onClick(DialogInterface dialog,int id) {
-							// do nothing just return
-							dialog.cancel();
-						}
-					});
-				AlertDialog alertDialog = alertDialogBuilder.create();
-				alertDialog.show();
-				break;
-			case R.id.menu_dosereg:
-				startActivity(new Intent(this, doseregistration.class));
-				break;
-
-        }
-
-        return true;
-    }
-	public void openSamplereg(){
-		try{
-	 		startActivity(new Intent(this, samplereg.class));
-		}
-		catch(Exception e){
-			e.printStackTrace();
-		}
-	}
+    
 	
-	
-	public void saveObs(){
-		/* Reading log of observations and reupload those that are not uploaded
-		 */
-		ArrayList<String> linelist = new ArrayList<>();
-		try{
-			InputStream is=openFileInput(errorfile);
-			BufferedReader rdr =new BufferedReader(new InputStreamReader(is));
-			String myLine;
-
-			while ((myLine=rdr.readLine())!=null) 
-				if(myLine.length()>4)
-					if (!(myLine.substring(0,5).equals("Error")))
-					linelist.add(myLine);	
-			File dir=getFilesDir();
-			File from = new File(dir,errorfile);
-			File to = new File(dir,errorfile+".bak");
-			if(from.exists()) if(!(from.renameTo(to))) debug("Could not rename");
-		}catch(Exception e){
-			Toast.makeText(getApplicationContext(),getResources().getString(R.string.noDataFound),Toast.LENGTH_SHORT).show();
-		}
-		Toast.makeText(getApplicationContext(),linelist.size()+" lines read - uploading",Toast.LENGTH_SHORT).show();
-		for(String line :linelist){
-			try{
-				if (!(line.substring(0,5).equals("Error"))){
-					// URL url = new URL(line);
-                    HashMap<String, String> paramset = new HashMap<String, String>();
-                    paramset.put("parameters",line);
-					new DataUploader(uploadUrl,errorfile,context).execute(paramset);
-					
-                 //   new PostObservation().execute(paramset);
-				}
-			} catch (Exception e) {
-				Toast.makeText(getApplicationContext(),"error "+e,Toast.LENGTH_LONG).show();
-			}
-		}
-        Integer lnum=0;
-        try {
-            lnum=linenumbers(new File(getFilesDir(), errorfile));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        showStatus(lnum.toString());
-	}
-	
-	
-
     
 	
 	
@@ -339,82 +221,18 @@ public class MainActivity extends RadiacActivity
 	}*/
 	
 	public void onMeasureStop(View v){
-		Button bt=(Button)findViewById(R.id.btStopMeasure);
-		bt.setEnabled(false);
+		super.onMeasureStop(v);
+		stopTime=Calendar.getInstance();
+		EditText st=(EditText)findViewById(R.id.etTimeTo);
+		st.setText(sdtHhmmss.format(stopTime.getTime()));
+		readgps();
 		List<Integer> toEnable=Arrays.asList(R.id.etMeasValue,R.id.etLatitude,R.id.etLongitude,R.id.etTimeFrom,R.id.etTimeTo);
 		for (Integer i : toEnable){
 			View et=findViewById(i);
 			et.setEnabled(true);
 		}
-		stopTime=Calendar.getInstance();
-		EditText st=(EditText)findViewById(R.id.etTimeTo);
-		st.setText(sdtHhmmss.format(stopTime.getTime()));
-		readgps();
 	}
-		
-public void readgps(){			
-		try{
-            if(lServiceBound){
-				Location loc=lService.getLocation();	
-				EditText crd=(EditText)findViewById(R.id.etLongitude);
-			//	debug(loc.toString());
-			//	crd.setText("59.435665");
-				crd.setText(String.valueOf(loc.getLongitude()));
-				crd=(EditText)findViewById(R.id.etLatitude);
-				crd.setText(String.valueOf(loc.getLatitude()));		
-			//	crd.setText("15.33243");
-				stopGPS();
-				}
-			else{
-                Toast.makeText(getApplicationContext(),getResources().getString(R.string.GPSServiceNotAvailable)+"-if",Toast.LENGTH_SHORT).show();
-            }
-        }catch(Exception e){
-            Toast.makeText(getApplicationContext(),getResources().getString(R.string.GPSLocationNotAvailable),Toast.LENGTH_LONG).show();
-        }
-	}
-	
-	
-	
-	
-	
-	
-	public void confirm(View v){
-		myTimerThread.resetTime();
-		View u =findViewById(R.id.btUndo);
-		if(u.isEnabled()){
-			resetUi();
-		}else{
-			enableFields(false);
-			HashMap params=new HashMap<String,String>();
-			params=collectParams();
-			new DataUploader(uploadUrl,errorfile,context).execute(params);
-		}
-	}
-	
-	public void resetUi(){
-		View u = findViewById(R.id.btUndo);
-		u.setEnabled(false);
-		for(Integer i:allItems){
-			View vi=findViewById(i);
-			String clss =	vi.getClass().getName();
-			if(clss.equals("android.widget.EditText")){
-				EditText et=(EditText)vi;
-				et.setText("");
-			}
-			if(clss.equals("android.widget.CheckBox")){
-				CheckBox cb=(CheckBox)vi;
-				cb.setChecked(false);
-			}
-		}
-		View bstart=findViewById(R.id.btStartMeasure);
-		bstart.setEnabled(true);
-		List<Integer> buttons =Arrays.asList(R.id.btConfirm,R.id.btUndo,R.id.btStopMeasure);
-		for (Integer i : buttons){
-			View btn=findViewById(i);
-			btn.setEnabled(false);
-		}
-	}
-	
+
 	
 	
 	public void undo(View v){
@@ -431,47 +249,7 @@ public void readgps(){
 		undo.setEnabled(!(ena));
 	}
 
- public HashMap collectParams(){
-	 HashMap params=new HashMap<String,String>();
-	 params.put("uuid",uuid);
-	 //	debug("here");
-	 // todo time, name, patrulje
-	 for(Integer i: allItems){
-		 View vi=findViewById(i);
-		 String key=getResources().getResourceEntryName(i);
-		 String value="";
-		 String clss =vi.getClass().getName();
-		 switch(clss){
-			 case "android.widget.EditText":
-				 EditText et=(EditText)vi;
-				 value=et.getText().toString();
-				 break;
-
-			 case "android.widget.CheckBox":
-				 CheckBox cb=(CheckBox)vi;
-				 if(cb.isChecked()){
-					 value="True";
-				 }else{
-					 value="False";
-				 }
-				 break;
-
-			 case "android.widget.Spinner":
-				 Spinner sp=(Spinner)vi;
-				 value=sp.getSelectedItem().toString();
-				 break;
-			 default:
-				 debug(clss);
-				 break;
-		 }
-		 params.put(key,value);
-
-		 //ongoing
-	 }
-//	 
-	 return(params);
- }	
-	
+ 
 	
 	
 	

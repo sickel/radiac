@@ -43,6 +43,10 @@ import org.json.*;
 
 
 public class samplereg extends RadiacActivity {
+	
+	
+	
+	
     /**
      * Whether or not the system UI should be auto-hidden after
      * {@link #AUTO_HIDE_DELAY_MILLIS} milliseconds.
@@ -73,22 +77,23 @@ public class samplereg extends RadiacActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
+		allItems=Arrays.asList(R.id.spSampletype,R.id.etSampleNumber,R.id.etLocname,
+					R.id.etAreaObservation,R.id.etWeatherObservation,R.id.etComment,
+					R.id.etBackground,R.id.etWeight,R.id.etSnowVolume,R.id.etSamplingTime,
+					R.id.etSampLatitude,R.id.etSampLongitude);
+	    mandatory =Arrays.asList(R.id.etSampleNumber,R.id.etLocname,R.id.etBackground);	
 		setContentView(R.layout.activity_samplereg);
-	
+		super.onCreate(savedInstanceState);	
 		ActionBar actionBar = getActionBar();
         assert actionBar != null;
         actionBar.setCustomView(R.layout.actionbar);
 		actionBar.setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM | ActionBar.DISPLAY_SHOW_HOME);
         startbutton=(Button)findViewById(R.id.btStartRegisterSample);
-		allItems=Arrays.asList(R.id.spSampletype,R.id.etSampleNumber,R.id.etLocname,
-			R.id.etAreaObservation,R.id.etWeatherObservation,R.id.etComment,
-			R.id.etBackground,R.id.etWeight,R.id.etSnowVolume,R.id.etSamplingTime,
-			R.id.etSampLatitude,R.id.etSampLongitude);
-		mandatory =Arrays.asList(R.id.spSampletype,R.id.etSampleNumber);	
+		startButton=R.id.btStartRegisterSample;
 		stopButton=R.id.btStopRegister;
 		startTimeField=R.id.etSamplingTime;
-		}
+		undoButton=R.id.btUndoSampreg;
+	}
 	
 	
     @Override
