@@ -478,6 +478,17 @@ public class RadiacActivity extends Activity
 	}
 
 	@Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // TODO: Rewrite to use fragments
+        getMenuInflater().inflate(R.menu.settings, menu);
+        return true;
+    }
+
+    
+	
+	
+	
+	@Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
 

@@ -170,14 +170,7 @@ public class MainActivity extends RadiacActivity
 	
 	
 	
-	@Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // TODO: Rewrite to use fragments
-        getMenuInflater().inflate(R.menu.settings, menu);
-        return true;
-    }
-
-    
+	
 	
     
 	
